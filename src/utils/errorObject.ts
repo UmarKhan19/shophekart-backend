@@ -3,6 +3,7 @@ import { IHttpError } from "../types/http.types"
 import responseMessage from "../constants/responseMessage"
 import config from "../config/config"
 import { EApplicationEnvironment } from "../constants/application"
+import logger from "./logger"
 
 // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 export default (error: Error | unknown, req: Request, errorStatusCode: number = 500): IHttpError<null> => {
@@ -16,8 +17,7 @@ export default (error: Error | unknown, req: Request, errorStatusCode: number = 
     }
 
     // Log
-    // eslint-disable-next-line no-console
-    console.info(`CONTROLLER_ERROR`, {
+    logger.info(`CONTROLLER_ERROR`, {
         meta: errorObj
     })
 
