@@ -1,43 +1,49 @@
 {
-  "name": "shophekart-backend",
-  "version": "1.0.0",
-  "description": "It is the backend of the web3 ecommerce platform 'Shophekart'",
-  "main": ".src/server.ts",
-  "scripts": {
-    "build": "npx tsc",
-    "dev": "nodemon ./src/server.ts",
-    "start": "node ./dist/server.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prepare": "husky"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UmarKhan19/shophekart-backend.git"
-  },
-  "author": "Shophekart",
-  "license": "ISC",
-  "lint-staged": {
-    "*.ts": [
-      "npm run lint:fix"
-    ]
-  },
-  "bugs": {
-    "url": "https://github.com/UmarKhan19/shophekart-backend/issues"
-  },
-  "homepage": "https://github.com/UmarKhan19/shophekart-backend#readme",
-  "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
-    "@eslint/js": "^9.12.0",
-    "@types/eslint__js": "^8.42.3",
-    "@types/node": "22.7.5",
-    "eslint": "^9.12.0",
-    "husky": "9.1.6",
-    "lint-staged": "15.2.10",
-    "nodemon": "3.1.7",
-    "ts-node": "10.9.2",
-    "typescript": "5.6.2",
-    "typescript-eslint": "^8.8.1"
-  }
+    "name": "shophekart-backend",
+    "version": "1.0.0",
+    "description": "It is the backend of the web3 ecommerce platform 'Shophekart'",
+    "main": ".src/server.ts",
+    "scripts": {
+        "build": "npx tsc",
+        "dev": "nodemon ./src/server.ts",
+        "start": "node ./dist/server.js",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix",
+        "format:check": "prettier . --check",
+        "format:fix": "prettier . --fix",
+        "prepare": "husky"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/UmarKhan19/shophekart-backend.git"
+    },
+    "author": "Shophekart",
+    "license": "ISC",
+    "lint-staged": {
+        "*.ts": [
+            "npm run lint:fix",
+            "npm run format:fix"
+        ]
+    },
+    "bugs": {
+        "url": "https://github.com/UmarKhan19/shophekart-backend/issues"
+    },
+    "homepage": "https://github.com/UmarKhan19/shophekart-backend#readme",
+    "devDependencies": {
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "@eslint/js": "^9.12.0",
+        "@types/eslint__js": "^8.42.3",
+        "@types/eslint-config-prettier": "^6.11.3",
+        "@types/node": "22.7.5",
+        "eslint": "^9.12.0",
+        "eslint-config-prettier": "^9.1.0",
+        "husky": "9.1.6",
+        "lint-staged": "15.2.10",
+        "nodemon": "3.1.7",
+        "prettier": "3.3.3",
+        "ts-node": "10.9.2",
+        "typescript": "5.6.2",
+        "typescript-eslint": "^8.8.1"
+    }
 }
