@@ -4,6 +4,10 @@ import util from "util"
 import config from "../config/config"
 import { EApplicationEnvironment } from "../constants/application"
 import path from "path"
+import * as sourceMapSupport from "source-map-support"
+
+// Linking trace support
+sourceMapSupport.install()
 
 const consoleLogFormat = format.printf((info): string => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
