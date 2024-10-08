@@ -1,0 +1,30 @@
+{
+  "name": "shophekart-backend",
+  "version": "1.0.0",
+  "description": "It is the backend of the web3 ecommerce platform 'Shophekart'",
+  "main": ".src/server.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "nodemon ./src/server.ts",
+    "start": "node ./dist/server.js",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UmarKhan19/shophekart-backend.git"
+  },
+  "author": "Shophekart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UmarKhan19/shophekart-backend/issues"
+  },
+  "homepage": "https://github.com/UmarKhan19/shophekart-backend#readme",
+  "devDependencies": {
+    "@types/node": "22.7.5",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.10",
+    "nodemon": "3.1.7",
+    "ts-node": "10.9.2",
+    "typescript": "5.6.2"
+  }
+}
