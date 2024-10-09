@@ -5,11 +5,29 @@ import responseMessage from "./constants/responseMessage"
 import httpError from "./utils/httpError"
 import { healthRouter } from "./routers"
 import helmet from "helmet"
+import cors from "cors"
+import { ALLOWED_ORIGINS } from "./constants/application"
 
 const app: Application = express()
 
 //Middlewares
 app.use(helmet())
+app.use(
+    cors({
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        origin: (origin, callback) => {
+            if (origin && ALLOWED_ORIGINS.includes(origin)) {
+                callback(null, true)
+            } else {
+                callback(new Error("Not allowed by CORS"))
+            }
+        },
+        credentials: true,
+        exposedHeaders: ["Content-Type", "Content-Length", "ETag", "Last-Modified"],
+        maxAge: 3600, // cache for 1 hour
+        preflightContinue: true
+    })
+)
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../", "public")))
 
