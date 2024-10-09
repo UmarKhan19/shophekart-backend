@@ -3,6 +3,7 @@ import path from "path"
 import globalErrorHandler from "./middlewares/globalErrorHandler"
 import responseMessage from "./constants/responseMessage"
 import httpError from "./utils/httpError"
+import { healthRouter } from "./routers"
 
 const app: Application = express()
 
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, "../", "public")))
 
 //Routes
+app.use("/api/v1/health", healthRouter)
 
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {
