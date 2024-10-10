@@ -9,5 +9,6 @@ export default {
     NOT_FOUND: (entity: string) => `${entity} not found.`,
     UNAUTHORIZED_ACCESS: "Unauthorized access. Please authenticate.",
     INTERNAL_SERVER_ERROR: "Internal server error. Please try again later.",
-    SOMETHING_WENT_WRONG: "Something went wrong!"
+    SOMETHING_WENT_WRONG: "Something went wrong!",
+    TOO_MANY_REQUESTS: `Too many requests! Please try again after some time`
 }
