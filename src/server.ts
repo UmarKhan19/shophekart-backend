@@ -1,8 +1,8 @@
 import app from "./app"
-import config from "./config/config"
+import { config } from "./config"
 import { initRateLimiter } from "./config/rateLimiter.config"
 import databaseService from "./services/database.service"
-import logger from "./utils/logger"
+import logger from "./utils/logger.util"
 
 const server = app.listen(config.PORT)
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

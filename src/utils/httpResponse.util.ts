@@ -10,10 +10,10 @@
  * @returns {void}
  */
 import { Request, Response } from "express"
-import { IHttpResponse } from "../types/http.types"
-import config from "../config/config"
+import { config } from "../config"
 import { EApplicationEnvironment } from "../constants/application"
-import logger from "./logger"
+import { logger } from "../utils"
+import { IHttpResponse } from "../types"
 
 export default (req: Request, res: Response, responseStatusCode: number, responseMessage: string, data: unknown): void => {
     /**

@@ -1,9 +1,9 @@
 import { Request } from "express"
-import { IHttpError } from "../types/http.types"
 import responseMessage from "../constants/responseMessage"
-import config from "../config/config"
+import { config } from "../config"
 import { EApplicationEnvironment } from "../constants/application"
-import logger from "./logger"
+import { logger } from "./"
+import { IHttpError } from "../types"
 
 // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 export default (error: Error | unknown, req: Request, errorStatusCode: number = 500): IHttpError<null> => {

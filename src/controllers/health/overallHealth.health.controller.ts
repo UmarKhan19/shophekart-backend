@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from "express"
-import httpResponse from "../../utils/httpResponse"
 import responseMessage from "../../constants/responseMessage"
-import httpError from "../../utils/httpError"
-import health from "../../utils/health"
+import { httpError, health, httpResponse } from "../../utils/"
 
 const overallHealth = (req: Request, res: Response, next: NextFunction) => {
     try {
