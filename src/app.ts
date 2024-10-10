@@ -15,13 +15,7 @@ app.use(helmet())
 app.use(
     cors({
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        origin: (origin, callback) => {
-            if (origin && ALLOWED_ORIGINS.includes(origin)) {
-                callback(null, true)
-            } else {
-                callback(new Error("Not allowed by CORS"))
-            }
-        },
+        origin: ALLOWED_ORIGINS,
         credentials: true,
         exposedHeaders: ["Content-Type", "Content-Length", "ETag", "Last-Modified"],
         maxAge: 3600, // cache for 1 hour
