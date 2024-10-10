@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express"
 import responseMessage from "../../constants/responseMessage"
-import { httpError, health, httpResponse } from "../../utils/"
+import { httpError, health, httpResponse, asyncHandler } from "../../utils/"
 
-const systemHealth = (req: Request, res: Response, next: NextFunction) => {
+const systemHealth = asyncHandler( (req: Request, res: Response, next: NextFunction) => {
     try {
         const healthData = {
             system: health.getSystemHealth(),
@@ -13,6 +13,6 @@ const systemHealth = (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
         httpError(next, error, req, 500)
     }
-}
+})
 
 export default systemHealth

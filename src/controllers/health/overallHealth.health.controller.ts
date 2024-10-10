@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express"
 import responseMessage from "../../constants/responseMessage"
-import { httpError, health, httpResponse } from "../../utils/"
+import { httpError, health, httpResponse, asyncHandler } from "../../utils/"
 
-const overallHealth = (req: Request, res: Response, next: NextFunction) => {
+const overallHealth = asyncHandler((req: Request, res: Response, next: NextFunction) => {
     try {
         const healthData = {
             application: health.getApplicationHealth(),
@@ -14,6 +14,6 @@ const overallHealth = (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
         httpError(next, error, req, 500)
     }
-}
+})
 
 export default overallHealth
