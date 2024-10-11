@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import supertest from "supertest"
-import app from "../src/app"
+import app from "../../../app"
 import request from "supertest"
 import mongoose from "mongoose"
 import { MongoMemoryServer } from "mongodb-memory-server"
 
-describe("Overall Health Controller", () => {
+describe("System Health Controller", () => {
     beforeAll(async () => {
         const mongoServer = await MongoMemoryServer.create()
         await mongoose.connect(mongoServer.getUri())
@@ -19,12 +19,12 @@ describe("Overall Health Controller", () => {
     })
 
     it("should return 200 and health data when request for overall health", async () => {
-        const res: supertest.Response = await request(app).get("/api/v1/health/")
+        const res: supertest.Response = await request(app).get("/api/v1/health/system")
         expect(res.statusCode).toEqual(200)
     })
 
     it("should return a JSON response with a success message when request for overall health", async () => {
-        const response: supertest.Response = await request(app).get("/api/v1/health/")
+        const response: supertest.Response = await request(app).get("/api/v1/health/system")
         expect(response.type).toEqual("application/json")
         expect(response.body).toHaveProperty("message", "Operation completed successfully.")
     })
@@ -35,12 +35,12 @@ describe("Overall Health Controller", () => {
     })
 
     it("should return a 404 status code when sending a POST request to the health endpoint", async () => {
-        const response: supertest.Response = await request(app).post("/api/v1/health/")
+        const response: supertest.Response = await request(app).post("/api/v1/health/system")
         expect(response.statusCode).toEqual(404)
     })
 
     it("should return the correct health data", async () => {
-        const response: supertest.Response = await request(app).get("/api/v1/health/")
+        const response: supertest.Response = await request(app).get("/api/v1/health/system")
 
         expect(response.statusCode).toEqual(200)
         expect(response.type).toEqual("application/json")
@@ -48,16 +48,8 @@ describe("Overall Health Controller", () => {
         const data = response.body
 
         expect(data.success).toBe(true)
+        expect(data.statusCode).toEqual(200)
         expect(data.message).toEqual("Operation completed successfully.")
-
-        expect(data.data.application).toEqual({
-            environment: expect.any(String),
-            uptime: expect.stringMatching(/^[0-9]+(\.[0-9]+)? seconds$/),
-            memoryUsage: expect.objectContaining({
-                heapTotal: expect.stringMatching(/^[0-9]+(\.[0-9]+)? MB$/),
-                heapUsed: expect.stringMatching(/^[0-9]+(\.[0-9]+)? MB$/)
-            })
-        })
 
         expect(data.data.system).toEqual({
             cpuUsage: expect.arrayContaining([expect.any(Number), expect.any(Number), expect.any(Number)]),
@@ -69,7 +61,7 @@ describe("Overall Health Controller", () => {
 
         expect(data.request).toEqual({
             method: "GET",
-            url: "/api/v1/health/",
+            url: "/api/v1/health/system",
             ip: expect.any(String)
         })
     })

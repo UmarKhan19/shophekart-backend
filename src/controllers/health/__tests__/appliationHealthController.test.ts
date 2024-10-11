@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import supertest from "supertest"
-import app from "../src/app"
-import request from "supertest"
+import app from "../../../app"
 import mongoose from "mongoose"
 import { MongoMemoryServer } from "mongodb-memory-server"
+import supertest from "supertest"
+import request from "supertest"
 
 describe("Application Health Controller", () => {
     beforeAll(async () => {
