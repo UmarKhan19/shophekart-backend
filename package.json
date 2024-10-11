@@ -4,7 +4,7 @@
     "description": "It is the backend of the web3 ecommerce platform 'Shophekart'",
     "main": ".src/server.ts",
     "scripts": {
-        "test": "cross-env NODE_ENV=test jest --forceExit",
+        "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
         "build": "npx tsc",
         "dev": "cross-env NODE_ENV=development nodemon ./src/server.ts",
         "start": "cross-env NODE_ENV=production node ./dist/server.js",

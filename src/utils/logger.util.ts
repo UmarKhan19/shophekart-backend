@@ -97,15 +97,18 @@ const fileTransport = (): Array<FileTransportInstance> => {
 }
 
 const mongodbTransport = (): Array<MongoDBTransportInstance> => {
-    return [
-        new transports.MongoDB({
-            level: "info",
-            db: config.DATABASE_URL as string,
-            metaKey: "meta",
-            expireAfterSeconds: 3600 * 24 * 30,
-            collection: "application-logs"
-        })
-    ]
+    if (config.ENV != EApplicationEnvironment.TEST) {
+        return [
+            new transports.MongoDB({
+                level: "info",
+                db: config.DATABASE_URL as string,
+                metaKey: "meta",
+                expireAfterSeconds: 3600 * 24 * 30,
+                collection: "application-logs"
+            })
+        ]
+    }
+    return []
 }
 
 export default createLogger({
