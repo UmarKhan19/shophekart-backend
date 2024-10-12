@@ -87,13 +87,16 @@ const consoleTransport = (): Array<ConsoleTransportInstance> => {
 }
 
 const fileTransport = (): Array<FileTransportInstance> => {
-    return [
-        new transports.File({
-            filename: path.join(__dirname, "../", "../", "logs", `${config.ENV}.log`),
-            level: "info",
-            format: format.combine(format.timestamp(), fileLogFormat)
-        })
-    ]
+    if (config.ENV != EApplicationEnvironment.TEST) {
+        return [
+            new transports.File({
+                filename: path.join(__dirname, "../", "../", "logs", `${config.ENV}.log`),
+                level: "info",
+                format: format.combine(format.timestamp(), fileLogFormat)
+            })
+        ]
+    }
+    return []
 }
 
 const mongodbTransport = (): Array<MongoDBTransportInstance> => {
@@ -102,7 +105,7 @@ const mongodbTransport = (): Array<MongoDBTransportInstance> => {
             new transports.MongoDB({
                 level: "info",
                 db: config.DATABASE_URL as string,
-                metaKey: "meta",
+                // metaKey: "meta",
                 expireAfterSeconds: 3600 * 24 * 30,
                 collection: "application-logs"
             })
