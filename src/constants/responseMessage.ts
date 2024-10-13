@@ -1,9 +1,9 @@
 export default {
     SUCCESSFUL_OPERATION: "Operation completed successfully.",
-    CREATED_SUCCESSFULLY: "Created successfully.",
-    UPDATED_SUCCESSFULLY: "Updated successfully.",
-    DELETED_SUCCESSFULLY: "Deleted successfully.",
-
+    CREATED_SUCCESSFULLY: (entity: string) => `${entity} created successfully.`,
+    ALREADY_EXISTS: (entity: string) => `${entity} already exists.`,
+    UPDATED_SUCCESSFULLY: (entity: string) => `${entity} updated successfully.`,
+    DELETED_SUCCESSFULLY: (entity: string) => `${entity} deleted successfully.`,
     INVALID_INPUT: "Invalid input. Please provide valid details.",
     OPERATION_FAILED: "Operation failed. Please try again.",
     NOT_FOUND: (entity: string) => `${entity} not found.`,
