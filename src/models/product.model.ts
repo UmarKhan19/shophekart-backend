@@ -10,6 +10,7 @@ const productSchema = new Schema<IProductDocument>({
     shippingType: { type: String, required: true },
     status: { type: String, required: true },
     rating: { type: Number, required: true },
+    price: { type: Number, required: true },
     productAddress: { type: Schema.Types.ObjectId },
     category: { type: Schema.Types.ObjectId },
     sellerId: { type: Schema.Types.ObjectId },
