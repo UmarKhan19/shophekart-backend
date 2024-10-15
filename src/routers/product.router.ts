@@ -7,6 +7,7 @@ import createProduct from "../controllers/product/createProduct.product.controll
 import updateProductPriceController from "../controllers/product/updateProductPrice.product.controllers";
 import deleteProductController from "../controllers/product/deleteProduct.product.controllers";
 import getSingleProductController from "../controllers/product/getSingleProduct.product.controller";
+import { getSingleProductSchema } from "../validation/product/getSingleProduct.validation";
 
 const router: Router = Router();
 
@@ -67,7 +68,7 @@ router
    * @returns {Promise<void>}
    */
   .delete(deleteProductController);
-  router.route("/:id").get( getSingleProductController)
+  router.route("/:id").get(validateSchema(getSingleProductSchema) ,getSingleProductController)
 
   /**
    * Exports the product router.

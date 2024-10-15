@@ -10,7 +10,8 @@ const updateProductPriceController = asyncHandler(async (
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const productId = req.params.id as string; 
-
+// eslint-disable-next-line no-console
+console.log(productId);
   const updatedProduct = await updateProductServicePrice(productId, req.body as IUpdateProductPrice["body"]); // assert the type of req.body manually
   httpResponse(req, res, 200, responseMessage.UPDATED_SUCCESSFULLY("Product Price"), updatedProduct);
 });

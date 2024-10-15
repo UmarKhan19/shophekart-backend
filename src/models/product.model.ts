@@ -11,9 +11,9 @@ const productSchema = new Schema<IProductDocument>({
     status: { type: String, required: true },
     rating: { type: Number, required: true },
     price: { type: Number, required: true },
-    productAddress: { type: Schema.Types.ObjectId },
-    category: { type: Schema.Types.ObjectId },
-    sellerId: { type: Schema.Types.ObjectId },
+    productAddress: { type: String},
+    category:{ type: String},
+    sellerId: { type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

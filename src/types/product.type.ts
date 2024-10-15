@@ -1,11 +1,11 @@
 // src/types/product.type.ts
-import { Document, ObjectId } from "mongoose";
+import { Document } from "mongoose";
 
 interface IProductDocument extends Document {
   /**
    * The unique identifier for the document.
    */
-  _id: ObjectId;
+  _id: string;
 
   /**
    * The name of the product.

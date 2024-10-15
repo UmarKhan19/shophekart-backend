@@ -1,13 +1,16 @@
+ 
 import { z } from "zod";
+import mongoose from "mongoose";
 
 export interface IGetSingleProduct {
-    query: {
-        productId: string;
-    };
+  params: {
+    id: string;
+  };
 }
 
 export const getSingleProductSchema = z.object({
-    query: z.object({
-        productId: z.string().uuid(),
-    }),
+  params: z.object({
+     
+    id: z.string().refine((id) => mongoose.Types.ObjectId.isValid(id)),
+  }),
 });
