@@ -1,6 +1,6 @@
 // src/types/product.type.ts
 import { Document } from "mongoose";
-
+import ICategoryDocument from "./category.type";
 interface IProductDocument extends Document {
   /**
    * The unique identifier for the document.
@@ -59,7 +59,7 @@ interface IProductDocument extends Document {
   /**
    * The category of the product.
    */
-  category: string|null;
+  category: ICategoryDocument;
 
   /**
    * The seller ID of the product.
