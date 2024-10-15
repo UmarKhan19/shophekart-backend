@@ -5,7 +5,7 @@ import { createProductSchema } from "../validation/product";
 import updateProductPriceSchema from "../validation/product/updateProductPrice.product.validation";
 import createProduct from "../controllers/product/createProduct.product.controllers";
 import updateProductPriceController from "../controllers/product/updateProductPrice.product.controllers";
-
+import deleteProductController from "../controllers/product/deleteProduct.product.controllers";
 const router: Router = Router();
 
 /**
@@ -50,7 +50,21 @@ router
    * @returns {Promise<void>}
    */
   .patch(validateSchema(updateProductPriceSchema), updateProductPriceController );
-
+  router
+  .route("/:productId/delete")
+  /**
+   * Deletes a product.
+   *
+   * This route deletes a product by its ID.
+   *
+   * @route DELETE /:productId/delete
+   * @access public
+   * @uses Controller deleteProduct to handle the deletion process.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
+  .delete(deleteProductController);
   /**
    * Exports the product router.
    *
