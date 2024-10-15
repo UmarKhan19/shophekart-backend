@@ -1,7 +1,7 @@
 import { Product } from "../../models";
 import { IProductDocument } from "../../types";
 
-const updateProductPrice = async (productId: string, updateData: { price: number }): Promise<IProductDocument> => {
+export const updateProductPrice = async (productId: string, updateData: { price: number }): Promise<IProductDocument> => {
     try {
       const updatedProduct = await Product.findByIdAndUpdate(productId, { price: updateData.price }, { new: true });
       if (!updatedProduct) {
@@ -14,4 +14,3 @@ const updateProductPrice = async (productId: string, updateData: { price: number
   };
   
 
-export default updateProductPrice;
