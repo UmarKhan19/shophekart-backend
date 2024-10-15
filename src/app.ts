@@ -3,7 +3,7 @@ import path from "path"
 import globalErrorHandler from "./middlewares/globalErrorHandler.middleware"
 import responseMessage from "./constants/responseMessage"
 import httpError from "./utils/httpError.util"
-import { healthRouter, userRouter } from "./routers"
+import { healthRouter, productRouter, userRouter } from "./routers"
 import helmet from "helmet"
 import cors from "cors"
 import { ALLOWED_ORIGINS } from "./constants/application"
@@ -40,7 +40,7 @@ app.use(
 //Routes
 app.use("/api/v1/health", healthRouter)
 app.use("/api/v1/user", userRouter)
-
+app.use("/api/v1/product", productRouter)
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {
     try {
