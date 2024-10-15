@@ -7,6 +7,7 @@ import { healthRouter, userRouter } from "./routers"
 import helmet from "helmet"
 import cors from "cors"
 import { ALLOWED_ORIGINS } from "./constants/application"
+import Session from "express-session"
 
 const app: Application = express()
 
@@ -24,6 +25,16 @@ app.use(
 )
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../", "public")))
+
+app.use(
+    Session({
+        name: "siwe-quickstart",
+        secret: "siwe-quickstart-secret",
+        resave: true,
+        saveUninitialized: true,
+        cookie: { secure: false, sameSite: true }
+    })
+)
 
 //Routes
 app.use("/api/v1/health", healthRouter)
