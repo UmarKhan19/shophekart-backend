@@ -51,7 +51,7 @@ router
    */
   .patch(validateSchema(updateProductPriceSchema), updateProductPriceController );
   router
-  .route("/:productId/delete")
+  .route("/:id/delete")
   /**
    * Deletes a product.
    *

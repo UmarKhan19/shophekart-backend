@@ -5,7 +5,7 @@ import responseMessage from "../../constants/responseMessage";
 
 const deleteProduct = async (productId: string): Promise<IProductDocument> => {
   try {
-     
+    
     const deletedProduct = await Product.findByIdAndDelete(productId);
     if (!deletedProduct) {
       throw new Error(responseMessage.NOT_FOUND("Product"));
