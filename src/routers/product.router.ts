@@ -52,8 +52,9 @@ router
    * @param {Object} res - Express response object
    * @returns {Promise<void>}
    */
-  .patch(validateSchema(updateProductPriceSchema), updateProductPriceController );
-  router
+  .patch(validateSchema(updateProductPriceSchema), updateProductPriceController);
+
+router
   .route("/:id/delete")
   /**
    * Deletes a product.
@@ -68,13 +69,30 @@ router
    * @returns {Promise<void>}
    */
   .delete(deleteProductController);
-  router.route("/:id").get(validateSchema(getSingleProductSchema) ,getSingleProductController)
 
+router
+  .route("/:id")
   /**
-   * Exports the product router.
+   * Retrieves a single product.
    *
-   * Makes the product router available for import and use in other modules.
+   * This route validates the incoming request params against the `getSingleProductSchema`
+   * and then calls the `getSingleProductController` controller to complete the retrieval process.
    *
-   * @returns {Router}
+   * @route GET /:id
+   * @access public
+   * @uses Middleware validateSchema to validate the request params against the `getSingleProductSchema`.
+   * @uses Controller getSingleProductController to handle the retrieval process.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
    */
+  .get(validateSchema(getSingleProductSchema), getSingleProductController);
+
+/**
+ * Exports the product router.
+ *
+ * Makes the product router available for import and use in other modules.
+ *
+ * @returns {Router}
+ */
 export default router;
