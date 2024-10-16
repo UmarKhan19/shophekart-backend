@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // controllers/getAllProducts.controller.ts
 
 import { Request, Response } from "express";
@@ -8,6 +9,7 @@ const getAllProductsController = asyncHandler(async (
   req: Request,
   res: Response,
 ) => {
+    console.log(111);
   const products = await getAllProducts();
   httpResponse(req, res, 200, "Products fetched successfully", products);
 });

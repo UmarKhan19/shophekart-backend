@@ -56,7 +56,14 @@ router
 * @returns {Promise<void>}
 */
 .patch(validateSchema(updateProductPriceSchema), updateProductPriceController);
+/**
+ * @api {GET} /products
+ * @description Fetch all products
+ * @returns {IProductDocument[]} products - List of products
+ * @throws {Error} If failed to get products
+ */
 
+router.route("/all").get(getAllProductsController);
 router
 .route("/:id/delete")
 /**
@@ -90,14 +97,7 @@ router
 * @returns {Promise<void>}
 */
 .get(validateSchema(getSingleProductSchema), getSingleProductController);
-/**
- * @api {GET} /products
- * @description Fetch all products
- * @returns {IProductDocument[]} products - List of products
- * @throws {Error} If failed to get products
- */
 
-router.route("/products").get(getAllProductsController);
 
 
 router
