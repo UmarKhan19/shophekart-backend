@@ -18,6 +18,7 @@ const createProductSchema = object({
         status: string({ required_error: validationErrorMessages.MISSING_ENTITY("Status") }),
         rating: number({ required_error: validationErrorMessages.MISSING_ENTITY("Rating") }),
         productAddress: string().optional(),
+        productType:string({ required_error: validationErrorMessages.MISSING_ENTITY("ProductType") }),
         category: objectIdValidator,  // Use ObjectId validator here
         sellerId: string().optional()
     })

@@ -8,6 +8,8 @@ const productSchema = new Schema<IProductDocument>({
   details: { type: String, required: true },
   images: { type: String, required: true },
   currencyType: { type: String, required: true },
+  productType: { type: String, required: true },
+
   shippingType: { type: String, required: true },
   status: { type: String, required: true },
   rating: { type: Number, required: true },

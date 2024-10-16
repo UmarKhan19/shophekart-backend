@@ -20,7 +20,10 @@ interface IProductDocument extends Document {
    * The details of the product.
    */
   details: string ;
-
+ /**
+   * The type of the product.
+   */
+ productType: string ;
   /**
    * The images of the product.
    */
