@@ -10,6 +10,7 @@ import deleteProductController from "../controllers/product/deleteProduct.produc
 import getSingleProductController from "../controllers/product/getSingleProduct.product.controller";
 import getProductsByCategoryController from "../controllers/product/getProductsByCategory.controller";
 import { getSingleProductSchema } from "../validation/product/getSingleProduct.validation";
+import getAllProductsController from "../controllers/product/getAllProduct.product.controller";
 
 const router: Router = Router();
 
@@ -89,6 +90,15 @@ router
 * @returns {Promise<void>}
 */
 .get(validateSchema(getSingleProductSchema), getSingleProductController);
+/**
+ * @api {GET} /products
+ * @description Fetch all products
+ * @returns {IProductDocument[]} products - List of products
+ * @throws {Error} If failed to get products
+ */
+
+router.route("/products").get(getAllProductsController);
+
 
 router
 .route("/by-category/:categoryName")
