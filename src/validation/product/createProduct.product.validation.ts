@@ -16,7 +16,7 @@ const createProductSchema = object({
         currencyType: string({ required_error: validationErrorMessages.MISSING_ENTITY("Currency Type") }),
         shippingType: string({ required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type") }),
         status: string({ required_error: validationErrorMessages.MISSING_ENTITY("Status") }),
-        rating: number({ required_error: validationErrorMessages.MISSING_ENTITY("Rating") }),
+        rating: number().optional(),
         productAddress: string().optional(),
         productType:string({ required_error: validationErrorMessages.MISSING_ENTITY("ProductType") }),
         category: objectIdValidator,  // Use ObjectId validator here
