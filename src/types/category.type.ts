@@ -1,4 +1,4 @@
-import { Document, Types } from "mongoose";
+import { Document } from "mongoose";
 
 interface ICategoryDocument extends Document {
   /**
@@ -6,15 +6,12 @@ interface ICategoryDocument extends Document {
    */
   _id: string;
 
-  /**
-   * The name of the category.
-   */
-  name: string;
+
 
   /**
    * The id of the parent category.
    */
-  parentCategory: Types.ObjectId | string;
+  parentCategory: string;
 
   /**
    * The date and time the document was created.

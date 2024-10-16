@@ -1,5 +1,11 @@
 import { object, string, number, TypeOf } from "zod";
 import validationErrorMessages from "../../constants/validationErrors";
+import mongoose from "mongoose"; // Import mongoose to use ObjectId validation
+
+// Custom validator to check if the category is a valid ObjectId
+const objectIdValidator = string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
+    message: validationErrorMessages.INVALID_ENTITY("Category")
+});
 
 const createProductSchema = object({
     body: object({
@@ -12,7 +18,7 @@ const createProductSchema = object({
         status: string({ required_error: validationErrorMessages.MISSING_ENTITY("Status") }),
         rating: number({ required_error: validationErrorMessages.MISSING_ENTITY("Rating") }),
         productAddress: string().optional(),
-        category: string().optional(),
+        category: objectIdValidator,  // Use ObjectId validator here
         sellerId: string().optional()
     })
 });
