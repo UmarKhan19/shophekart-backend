@@ -6,4 +6,4 @@ export enum EApplicationEnvironment {
     TEST = "test"
 }
 
-export const ALLOWED_ORIGINS: string[] = [config.CLIENT_URL as string]
+export const ALLOWED_ORIGINS: string = config.CLIENT_URL as string
