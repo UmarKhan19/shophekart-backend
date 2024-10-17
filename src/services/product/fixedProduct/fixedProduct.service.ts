@@ -5,7 +5,7 @@ import IFixedProductDocument from "../../../types/fixedProduct.type";
 const getAllFixedProducts = async (): Promise<IFixedProductDocument[]> => {
   try {
     const fixedProducts = await FixedProduct.find()
-      .populate({ path: "productId", select: "_id name" })
+      .populate({ path: "productId"})
       .exec();
     return fixedProducts;
   } catch (error) {
