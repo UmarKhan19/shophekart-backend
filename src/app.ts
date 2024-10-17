@@ -1,3 +1,4 @@
+ 
 import express, { Application, NextFunction, Request, Response } from "express"
 import path from "path"
 import globalErrorHandler from "./middlewares/globalErrorHandler.middleware"
@@ -28,8 +29,10 @@ app.use(
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../", "public")))
 
+ 
 const MongoDBStore = mongoDBStore(Session)
 
+ 
 const sessionStore = new MongoDBStore({
     uri: config.DATABASE_URL as string,
     collection: "user-sessions"
