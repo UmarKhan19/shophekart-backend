@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 // fixedProduct.service.ts
 import { FixedProduct } from "../../../models";
 import IFixedProductDocument from "../../../types/fixedProduct.type";
@@ -11,7 +11,7 @@ const createFixedProduct = async (fixedProductData: Partial<IFixedProductDocumen
     });
 
     if (existingFixedProduct) {
-      throw new Error(`A fixed product with product ID ${fixedProductData.productId} already exists`);
+      throw new Error(`Product already exists`);
     }
 
     // Create a new fixed product
