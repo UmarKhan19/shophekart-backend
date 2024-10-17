@@ -3,9 +3,9 @@
 import { Router } from "express";
 import { validateSchema } from "../middlewares";
 import { createProductSchema } from "../validation/product";
-import updateProductPriceSchema from "../validation/product/updateProductPrice.product.validation";
+// import updateProductPriceSchema from "../validation/product/updateProductPrice.product.validation";
 import createProduct from "../controllers/product/createProduct.product.controllers";
-import updateProductPriceController from "../controllers/product/updateProductPrice.product.controllers";
+// import updateProductPriceController from "../controllers/product/updateProductPrice.product.controllers";
 import deleteProductController from "../controllers/product/deleteProduct.product.controllers";
 import getSingleProductController from "../controllers/product/getSingleProduct.product.controller";
 import getProductsByCategoryController from "../controllers/product/getProductsByCategory.controller";
@@ -39,23 +39,23 @@ router
 */
 .post(validateSchema(createProductSchema), createProduct);
 
-router
-.route("/:id/update-price")
-/**
-* Handles product price updates.
-*
-* This route validates the incoming request body against the `updateProductPriceSchema`
-* and then calls the `updateProductPrice` controller to complete the update process.
-*
-* @route PATCH /:id/update-price
-* @access public
-* @uses Middleware validateSchema to validate the request body against the `updateProductPriceSchema`.
-* @uses Controller updateProductPrice to handle the update process.
-* @param {Object} req - Express request object
-* @param {Object} res - Express response object
-* @returns {Promise<void>}
-*/
-.patch(validateSchema(updateProductPriceSchema), updateProductPriceController);
+// router
+// .route("/:id/update-price")
+// /**
+// * Handles product price updates.
+// *
+// * This route validates the incoming request body against the `updateProductPriceSchema`
+// * and then calls the `updateProductPrice` controller to complete the update process.
+// *
+// * @route PATCH /:id/update-price
+// * @access public
+// * @uses Middleware validateSchema to validate the request body against the `updateProductPriceSchema`.
+// * @uses Controller updateProductPrice to handle the update process.
+// * @param {Object} req - Express request object
+// * @param {Object} res - Express response object
+// * @returns {Promise<void>}
+// */
+// .patch(validateSchema(updateProductPriceSchema), updateProductPriceController);
 /**
  * @api {GET} /products
  * @description Fetch all products

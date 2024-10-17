@@ -5,6 +5,6 @@ import { validateSchema } from "../middlewares";
 import createFixedProductSchema from "../validation/product/fixedProduct/fixedProduct.product.validation";
 const router = express.Router();
 
-router.route("/fixed-products").post(validateSchema(createFixedProductSchema) ,createFixedProductController);
+router.route("/create").post(validateSchema(createFixedProductSchema) ,createFixedProductController);
 
 export default router;

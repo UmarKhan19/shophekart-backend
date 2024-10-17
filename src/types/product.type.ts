@@ -49,10 +49,7 @@ interface IProductDocument extends Document {
    */
   rating: number;
 
-  /**
-   * The price of the product
-   */
-  price: number;
+  
   /**
    * The product address of the product.
    */
