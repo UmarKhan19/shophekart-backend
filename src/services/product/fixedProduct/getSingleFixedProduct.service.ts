@@ -5,8 +5,9 @@ import responseMessage from "../../../constants/responseMessage";
 
 const getSingleFixedProduct = async (fixedProductId: string): Promise<IFixedProductDocument> => {
   try {
-    const fixedProduct = await FixedProduct.findById(fixedProductId)
-      .populate({ path: "productId"})
+    const fixedProduct = await FixedProduct.findOne({
+      productId: fixedProductId,
+    }).populate({ path: "productId"})
       .exec();
     if (!fixedProduct) {
       throw new Error(responseMessage.NOT_FOUND("Fixed Product"));
