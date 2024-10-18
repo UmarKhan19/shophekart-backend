@@ -1,5 +1,5 @@
 export default {
-    SUCCESSFUL_OPERATION: "Operation completed successfully.",
+    SUCCESSFUL_OPERATION: (operation: string) => `${operation} completed successfully.`,
     CREATED_SUCCESSFULLY: (entity: string) => `${entity} created successfully.`,
     ALREADY_EXISTS: (entity: string) => `${entity} already exists.`,
     UPDATED_SUCCESSFULLY: (entity: string) => `${entity} updated successfully.`,
