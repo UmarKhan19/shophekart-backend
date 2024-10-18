@@ -1,0 +1,1 @@
+export {default as createProductSchema} from "./createProduct.product.validation"

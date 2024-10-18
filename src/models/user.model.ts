@@ -7,7 +7,7 @@
  */
 
 import { model, Schema } from "mongoose"
-import ValidationErrorMessages from "../constants/validationErrors"
+import validationErrorMessages from "../constants/validationErrors"
 import { IUserDocument } from "../types"
 
 /**
@@ -16,7 +16,7 @@ import { IUserDocument } from "../types"
  * This schema defines the structure for the User data model.
  * It includes fields for walletAddress, firstName, lastName, email, phoneNumber, and trustScore.
  * Each field has validation rules and constraints defined.
- */
+ **/
 const userSchema = new Schema(
     {
         /**
@@ -27,7 +27,7 @@ const userSchema = new Schema(
          */
         walletAddress: {
             type: String,
-            required: [true, ValidationErrorMessages.MISSING_ENTITY("Wallet Address")],
+            required: [true, validationErrorMessages.MISSING_ENTITY("Wallet Address")],
             unique: true,
             index: true
         },
@@ -76,7 +76,7 @@ const userSchema = new Schema(
         trustScore: {
             type: Number,
             required: true,
-            min: [0, ValidationErrorMessages.MIN_VALUE("Trust Score", 0)],
+            min: [0, validationErrorMessages.MIN_VALUE("Trust Score", 0)],
             default: 0
         }
     },
