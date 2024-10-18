@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express"
 import { asyncHandler, httpError, httpResponse } from "../../utils"
-import { FixedProduct, Order } from "../../models"
+import { FixedProduct } from "../../models"
 import { TCreateOrder } from "../../validation/order/create.order.validation"
 import responseMessage from "../../constants/responseMessage"
+import { createOrderService } from "../../services/order"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"]>, res: Response, next: NextFunction) => {
@@ -15,22 +16,17 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
         return
     }
 
-    const order = await Order.create({
+    const order = await createOrderService({
         buyerId,
         deliveryBy,
-        orderStatus: "pending",
         productId,
-        productIdOnChain,
         shippingPrice,
-        soldAtPrice: product.price,
-        tokenId
+        productIdOnChain,
+        tokenId,
+        soldAtPrice: product.price ?? 0
     })
 
-    if (!order) {
-        httpError(next, new Error(responseMessage.OPERATION_FAILED("Order creation")), req, 500)
-    }
-
-    httpResponse(req, res, 201, responseMessage.SUCCESSFUL_OPERATION("Order creation"), null)
+    httpResponse(req, res, 201, responseMessage.SUCCESSFUL_OPERATION("Order creation"), order)
 })
 
 export default createOrder
