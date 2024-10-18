@@ -31,6 +31,10 @@ const reviewSchema: Schema<IReviewDocument> = new Schema<IReviewDocument>({
     max: 5,
     required: true,
   },
+replyNumber:{
+type:Number,
+required:false
+},
   comment: {
     type: String,
     required: true,
