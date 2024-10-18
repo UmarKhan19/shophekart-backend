@@ -4,8 +4,8 @@ import { model, Schema } from "mongoose";
 import IReviewDocument from "../types/review.type";
 import User from "./user.model";
 
-const reviewSchema = new Schema<IReviewDocument>({
-  targetType: {
+const reviewSchema: Schema<IReviewDocument> = new Schema<IReviewDocument>({
+    targetType: {
     type: String,
     enum: ["Product", "User"], // It can be either 'Product' or 'User'
     required: true,
