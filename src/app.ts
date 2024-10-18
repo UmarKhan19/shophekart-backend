@@ -11,6 +11,7 @@ import { ALLOWED_ORIGINS } from "./constants/application"
 import Session from "express-session"
 import mongoDBStore from "connect-mongodb-session"
 import { config } from "./config"
+import reviewRouter from "./routers/review.router"
 
 const app: Application = express()
 
@@ -56,6 +57,7 @@ app.use("/api/v1/user", userRouter)
 app.use("/api/v1/product", productRouter)
 app.use("/api/v1/category", categoryRouter)
 app.use("/api/v1/fixedProduct", fixedProductRouter)
+app.use("/api/v1/review",reviewRouter)
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {
     try {
