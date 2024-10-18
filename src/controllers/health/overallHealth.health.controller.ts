@@ -10,7 +10,7 @@ const overallHealth = asyncHandler((req: Request, res: Response, next: NextFunct
             timeStamp: Date.now()
         }
 
-        httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION, healthData)
+        httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("Overall health"), healthData)
     } catch (error) {
         httpError(next, error, req, 500)
     }

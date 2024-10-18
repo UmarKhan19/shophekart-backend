@@ -51,7 +51,7 @@ const getSingleUser = asyncHandler(async (req: Request<{}, {}, IGetSingleUser["b
      * @param {string} message - Response message.
      * @param {Object} data - User data.
      */
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION, user)
+    httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("User"), user)
 })
 
 export default getSingleUser
