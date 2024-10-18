@@ -1,62 +1,14 @@
-// review.type.ts
-import { Document, Types } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
-interface IReviewDocument extends Document {
-  /**
-   * The unique identifier for the document.
-   */
-  _id: string;
-
-  /**
-   * The ID of the product or user being reviewed.
-   */
-  targetId: Types.ObjectId;
-
-  /**
-   * The type of the target. Can be either 'product' or 'user'.
-   */
-  targetType: string;
-
-  /**
-   * The ID of the user who made the review.
-   */
-  reviewerId: Types.ObjectId;
-
-  /**
-   * The type of review. Can be either 'productReview' or 'userReview'.
-   */
-  reviewType: string;
-
-  /**
-   * The rating of the review.
-   */
-  rating: number;
-
-  /**
-   * The comment made in the review.
-   */
-  comment: string;
-
-  /**
-   * The number of likes on the review.
-   */
-  likes: number;
-
-  /**
-   * The number of dislikes on the review.
-   */
-  dislikes: number;
-
-  /**
-   * The date and time the document was created.
-   */
-  createdAt: Date;
-
-  /**
-   * The date and time the document was last updated.
-   */
-  updatedAt: Date;
+export default interface IReviewDocument extends Document {
+  target_id: ObjectId;  // Reference to Product or User based on targetType
+  targetType: "Product" | "User";  // Type of review target (Product or User)
+  reviewer_id: ObjectId;  // Reference to User who is reviewing
+  reviewType: "positive" | "neutral" | "negative";  // Type of review
+  rating: number;  // Rating between 1 and 5
+  comment: string;  // Review comment
+  likes: number;  // Number of likes on the review
+  dislikes: number;  // Number of dislikes on the review
+  createdAt: Date;  // Timestamp when review was created
+  updatedAt: Date;  // Timestamp when review was last updated
 }
-
-export default IReviewDocument;
-
