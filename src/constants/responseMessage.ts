@@ -4,7 +4,7 @@ export default {
     ALREADY_EXISTS: (entity: string) => `${entity} already exists.`,
     UPDATED_SUCCESSFULLY: (entity: string) => `${entity} updated successfully.`,
     DELETED_SUCCESSFULLY: (entity: string) => `${entity} deleted successfully.`,
-    
+    FETCHED_SUCCESSFULLY: (entity: string) => `${entity} fetched successfully.`,
     INVALID_INPUT: "Invalid input. Please provide valid details.",
     OPERATION_FAILED: "Operation failed. Please try again.",
     NOT_FOUND: (entity: string) => `${entity} not found.`,

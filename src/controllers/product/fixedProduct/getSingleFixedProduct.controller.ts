@@ -19,7 +19,7 @@ const getSingleFixedProductController = asyncHandler(async (req: Request<Record<
         throw new Error("Invalid ID");
       }
       const fixedProduct = await getSingleFixedProduct(id);
-      res.status(200).json({ message: responseMessage.UPDATED_SUCCESSFULLY("Fixed Product"), fixedProduct });
+      res.status(200).json({ message: responseMessage.FETCHED_SUCCESSFULLY("Fixed Product"), fixedProduct });
     } catch (error) {
       next(error); // pass the error to the next middleware
     }
