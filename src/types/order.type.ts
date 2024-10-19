@@ -7,6 +7,7 @@
  */
 
 import { Types } from "mongoose"
+import { ORDER_STATUS } from "../constants/application"
 
 /**
  * Type definition for an order document.
@@ -31,7 +32,7 @@ type TOrder = {
      * @example
      * 'pending', 'shipped', 'delivered', 'cancelled'
      */
-    orderStatus: "pending" | "shipped" | "delivered" | "cancelled"
+    orderStatus: ORDER_STATUS
 
     /**
      * The expected delivery date of the order.
