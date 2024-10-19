@@ -1,16 +1,8 @@
-import { Document, ObjectId } from "mongoose";
+import IProductDocument from "./product.type"
 
-interface ISize {
-  size: string;
-  price: number;
-  stock: number;
-}
-
-export default interface IFixedProductDocument extends Document {
-  productId: ObjectId;  // Reference to Product
-  sizes?: ISize[];  // Optional sizes array
-  price?: number;  // Required if sizes are not provided
-  stock?: number;  // Required if sizes are not provided
-  createdAt: Date;
-  updatedAt: Date;
+export default interface IFixedProductDocument extends IProductDocument {
+    price: number
+    stock: number
+    createdAt: Date
+    updatedAt: Date
 }
