@@ -19,7 +19,7 @@ export default async function updateOrderStatusService(
 
     if (!product) throw new Error(responseMessage.NOT_FOUND("Product"))
 
-    if ((product.sellerId as string).toString() !== sellerId.toString()) throw new Error(responseMessage.UNAUTHORIZED_ACCESS)
+    if (product.sellerId.toString() !== sellerId.toString()) throw new Error(responseMessage.UNAUTHORIZED_ACCESS)
 
     order.orderStatus = status
 
