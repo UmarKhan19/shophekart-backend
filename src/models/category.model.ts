@@ -1,12 +1,12 @@
-import { Schema, model } from "mongoose";
-import ICategoryDocument from "../types/category.type";
+import { Schema, model } from "mongoose"
+import ICategoryDocument from "../types/category.type"
 
-const categorySchema = new Schema<ICategoryDocument>({
-   
-  
-    parentCategory: { type:String },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
-  });
-  
-export default model<ICategoryDocument>("Category", categorySchema);
+const categorySchema = new Schema<ICategoryDocument>(
+    {
+        parentCategory: { type: Schema.Types.ObjectId, ref: "Category" },
+        label: { type: String, required: true, lowercase: true }
+    },
+    { timestamps: true }
+)
+
+export default model<ICategoryDocument>("Category", categorySchema)
