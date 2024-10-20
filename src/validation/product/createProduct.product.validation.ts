@@ -3,6 +3,7 @@ import validationErrorMessages from "../../constants/validationErrors"
 
 const createProductSchema = z.object({
     body: z.object({
+        
         productIdOnChain: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id On Chain") }),
         sellerId: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Seller Id") })

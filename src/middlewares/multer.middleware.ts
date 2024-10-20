@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -26,6 +27,7 @@ const upload = multer({
   storage,
   limits: { files: 5 }, // maximum of 5 images
   fileFilter: (_req: any, file: any, cb: any) => {
+    console.log("ho");
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
       cb(null, true);
     } else {
