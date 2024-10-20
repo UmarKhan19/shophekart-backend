@@ -34,7 +34,7 @@ const logout = asyncHandler((req: Request, res: Response, next: NextFunction): v
     /**
      * Sends a successful response to the client if the session is destroyed successfully.
      */
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION, null)
+    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("User logout"), null)
 })
 
 export default logout

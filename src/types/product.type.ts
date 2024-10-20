@@ -1,79 +1,23 @@
 // src/types/product.type.ts
-import { Document, Types } from "mongoose";
-interface IProductDocument extends Document {
-  /**
-   * The unique identifier for the document.
-   */
-  _id: string;
+import { Types } from "mongoose"
 
-  /**
-   * The name of the product.
-   */
-  name: string;
-
-  /**
-   * The description of the product.
-   */
-  description: string ;
-
-  /**
-   * The details of the product.
-   */
-  details: string ;
- /**
-   * The type of the product.
-   */
- productType: string ;
-  /**
-   * The images of the product.
-   */
-  images: string;
-
-  /**
-   * The currency type of the product.
-   */
-  currencyType: string;
-
-  /**
-   * The shipping type of the product.
-   */
-  shippingType: string;
-
-  /**
-   * The status of the product.
-   */
-  status: string;
-
-  /**
-   * The rating of the product.
-   */
-  rating: number;
-
-  
-  /**
-   * The product address of the product.
-   */
-  productAddress: string|null;
-
-  /**
-   * The category of the product.
-   */
-  category:Types.ObjectId;
-
-  /**
-   * The seller ID of the product.
-   */
-  sellerId:  string|null;
-
-  /**
-   * The date and time the document was created.
-   */
-  createdAt: Date;
-
-  /**
-   * The date and time the document was last updated.
-   */
-  updatedAt: Date;
+interface IProductDocument {
+    _id: string
+    productIdOnChain: string
+    sellerId: Types.ObjectId
+    currencyType: "usdt" | "usdc" | "cshop" | "bnb"
+    currencyAddress: string
+    name: string
+    description: string
+    details: string
+    images: string
+    shippingType: "global" | "local"
+    status: "draft" | "published" | "archived" | "deleted"
+    rating: number
+    productAddress: string | null
+    category: Types.ObjectId
+    createdAt: Date
+    updatedAt: Date
 }
 
-export default IProductDocument;
+export default IProductDocument

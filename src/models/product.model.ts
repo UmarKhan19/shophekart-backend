@@ -1,24 +1,33 @@
-import { Schema, model } from "mongoose";
-import IProductDocument from "../types/product.type";
-import Category from "../models/category.model";
+import { Schema, model } from "mongoose"
+import IProductDocument from "../types/product.type"
+import Category from "../models/category.model"
 
-const productSchema = new Schema<IProductDocument>({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  details: { type: String, required: true },
-  images: { type: String, required: true },
-  currencyType: { type: String, required: true },
-  productType: { type: String, required: true },
+const addressSchema = new Schema({
+    address: { type: String, required: true, trim: true },
+    state: { type: String, required: true, trim: true },
+    country: { type: String, required: true, trim: true },
+    postalCode: { type: String, required: true, trim: true }
+})
 
-  shippingType: { type: String, required: true },
-  status: { type: String, required: true },
-  rating: { type: Number, required: true, default: 0 },
+const productSchema = new Schema<IProductDocument>(
+    {
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+        details: { type: String, required: true },
+        images: { type: String, required: true },
+        currencyType: { type: String, required: true, enum: ["usdt", "usdc", "cshop", "bnb"] },
+        shippingType: { type: String, required: true, default: "global" },
+        status: { type: String, required: true, default: "published" },
+        rating: { type: Number, required: true, default: 0 },
+        currencyAddress: { type: String, required: true },
+        productIdOnChain: { type: String, required: true },
+        productAddress: { type: addressSchema },
+        category: { type: Schema.Types.ObjectId, ref: Category, required: true },
+        sellerId: { type: Schema.Types.ObjectId, ref: "User", required: true }
+    },
+    { timestamps: true, discriminatorKey: "type" }
+)
 
-  productAddress: { type: String },
-  category: { type: Schema.Types.ObjectId, ref: Category, required:true },
-  sellerId: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
-});
+const Product = model<IProductDocument>("Product", productSchema)
 
-export default model<IProductDocument>("Product", productSchema);
+export default Product

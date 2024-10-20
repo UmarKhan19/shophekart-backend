@@ -1,27 +1,17 @@
-// fixedProduct.validation.ts
-import { object, array, string, number, TypeOf } from "zod";
-import validationErrorMessages from "../../../constants/validationErrors";
-import mongoose from "mongoose"; // Import mongoose to use ObjectId validation
+// fixedProduct.product.validation.ts
+import { object, string, number, TypeOf } from "zod"
+import productTypeValidator from "../createProduct.product.validation"
 
-// Custom validator to check if the product is a valid ObjectId
-const objectIdValidator = string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-  message: validationErrorMessages.INVALID_ENTITY("Product"),
-});
+const fixedProductValidator = object({
+    body: object({
+        ...productTypeValidator.shape.body.shape,
+        price: number({ required_error: "Price is required" }).min(0, "Price must be greater than or equal to 0"),
+        stock: number({ required_error: "Stock is required" }).min(0, "Stock must be greater than or equal to 0"),
+        productAddress: string({ required_error: "Product Address is required" }),
+        productIdOnChain: string({ required_error: "Product Id On Chain is required" })
+    })
+})
 
-const sizeValidator = object({
-  size: string({ required_error: validationErrorMessages.MISSING_ENTITY("Size") }),
-  price: number({ required_error: validationErrorMessages.MISSING_ENTITY("Price") }),
-  stock: number({ required_error: validationErrorMessages.MISSING_ENTITY("Stock") }),
-});
+export default fixedProductValidator
 
-const createFixedProductSchema = object({
-  body: object({
-    productId: objectIdValidator,
-    sizes: array(sizeValidator).optional(),
-    price: number().optional(),
-    stock: number().optional(),
-  }),
-});
-
-export default createFixedProductSchema;
-export type ICreateFixedProduct = TypeOf<typeof createFixedProductSchema>;
+export type ICreateFixedProduct = TypeOf<typeof fixedProductValidator>

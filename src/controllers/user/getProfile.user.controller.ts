@@ -69,7 +69,7 @@ const getProfile = asyncHandler(async (req: Request, res: Response, next: NextFu
      * Returning the user's profile data in the HTTP response with a 200 status code.
      */
 
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION, { user })
+    httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("User Profile data"), { user })
 })
 
 export default getProfile

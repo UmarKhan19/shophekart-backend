@@ -45,7 +45,7 @@ const getNonce = asyncHandler((req: Request, res: Response) => {
      * @param {string} responseMessage.SUCCESSFUL_OPERATION - The message to be included in the response body.
      * @param {string} mySession.nonce - The generated nonce to be included in the response body.
      */
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION, { nonce: mySession.nonce })
+    httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("Nonce"), { nonce: mySession.nonce })
 })
 
 export default getNonce

@@ -1,28 +1,36 @@
-import { object, string, number, TypeOf } from "zod";
-import validationErrorMessages from "../../constants/validationErrors";
-import mongoose from "mongoose"; // Import mongoose to use ObjectId validation
+import { z } from "zod"
+import validationErrorMessages from "../../constants/validationErrors"
 
-// Custom validator to check if the category is a valid ObjectId
-const objectIdValidator = string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-    message: validationErrorMessages.INVALID_ENTITY("Category")
-});
-
-const createProductSchema = object({
-    body: object({
-        name: string({ required_error: validationErrorMessages.MISSING_ENTITY("Name") }),
-        description: string({ required_error: validationErrorMessages.MISSING_ENTITY("Description") }),
-        details: string({ required_error: validationErrorMessages.MISSING_ENTITY("Details") }),
-        images: string({ required_error: validationErrorMessages.MISSING_ENTITY("Images") }),
-        currencyType: string({ required_error: validationErrorMessages.MISSING_ENTITY("Currency Type") }),
-        shippingType: string({ required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type") }),
-        status: string({ required_error: validationErrorMessages.MISSING_ENTITY("Status") }),
-        rating: number().optional(),
-        productAddress: string().optional(),
-        productType:string({ required_error: validationErrorMessages.MISSING_ENTITY("ProductType") }),
-        category: objectIdValidator,  // Use ObjectId validator here
-        sellerId: string().optional()
+const createProductSchema = z.object({
+    body: z.object({
+        productIdOnChain: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id On Chain") }),
+        sellerId: z
+            .string({ required_error: validationErrorMessages.MISSING_ENTITY("Seller Id") })
+            .uuid(validationErrorMessages.MISSING_ENTITY("Seller Id")),
+        currencyType: z.enum(["usdt", "usdc", "cshop", "bnb"], {
+            required_error: validationErrorMessages.MISSING_ENTITY("Currency Type"),
+            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Currency Type")
+        }),
+        currencyAddress: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Currency Address") }),
+        name: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Name") }),
+        description: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Description") }),
+        details: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Details") }),
+        images: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Images") }),
+        shippingType: z.enum(["local", "global"], {
+            required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
+            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")
+        }),
+        productAddress: z.object({
+            address: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Address") }),
+            state: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("State") }),
+            country: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Country") }),
+            postalCode: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Postal Code") })
+        }),
+        category: z
+            .string({ required_error: validationErrorMessages.MISSING_ENTITY("Category") })
+            .uuid(validationErrorMessages.INVALID_ENTITY("Category"))
     })
-});
+})
 
-export default createProductSchema;
-export type ICreateProduct = TypeOf<typeof createProductSchema>;
+export default createProductSchema
+export type TCreateProduct = z.TypeOf<typeof createProductSchema>
