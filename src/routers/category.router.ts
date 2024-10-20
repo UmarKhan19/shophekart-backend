@@ -8,6 +8,7 @@ import createCategorySchema from "../validation/category/createCategory.category
 
 // Import the controller for creating a category
 import createCategoryController from "../controllers/category/category.controller";
+import getCategoriesController from "../controllers/category/getCategories.controller";
 
 const categoryRouter: Router = Router();
 
@@ -27,5 +28,8 @@ categoryRouter.post(
   validateSchema(createCategorySchema),
   createCategoryController
 );
-
+categoryRouter.get(
+  "/all",
+  getCategoriesController
+)
 export default categoryRouter;
