@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Router } from "express"
 import { validateSchema } from "../middlewares"
 import { getSingleUserSchema, registerUserSchema } from "../validation/user"

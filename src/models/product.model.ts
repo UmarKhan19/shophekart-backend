@@ -14,7 +14,7 @@ const productSchema = new Schema<IProductDocument>(
         name: { type: String, required: true },
         description: { type: String, required: true },
         details: { type: String, required: true },
-        images: { type: String, required: true },
+        images: [ { type: String, required: true } ],
         currencyType: { type: String, required: true, enum: ["usdt", "usdc", "cshop", "bnb"] },
         shippingType: { type: String, required: true, default: "global" },
         status: { type: String, required: true, default: "published" },
