@@ -15,7 +15,10 @@ const createProductSchema = z.object({
         name: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Name") }),
         description: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Description") }),
         details: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Details") }),
-        images: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Images") }),
+        images: z
+        .array(z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Image URL") }))
+        .min(1, validationErrorMessages.MISSING_ENTITY("At least one image"))
+        .max(5, validationErrorMessages.INVALID_ENTITY("A maximum of 5 images")),
         shippingType: z.enum(["local", "global"], {
             required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")

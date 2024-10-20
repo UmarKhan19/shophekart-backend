@@ -10,7 +10,7 @@ interface IProductDocument {
     name: string
     description: string
     details: string
-    images: string
+    images: string[]
     shippingType: "global" | "local"
     status: "draft" | "published" | "archived" | "deleted"
     rating: number
