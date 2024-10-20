@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -25,10 +26,10 @@ const createFixedProductController = asyncHandler(async (req: Request<{}, {}, IC
     shippingType,
     stock,
   } = req.body;
-
+console.log(req.body);
   // Handle images uploaded by Multer (req.files is an array of image file details)
   const images = (req.files as Express.Multer.File[]).map((file) => file.path); // Cloudinary image URLs
-
+console.log(images);
   const fixedProduct = await createFixedProduct({
     category: new Types.ObjectId(category),
     currencyAddress,

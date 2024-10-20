@@ -5,13 +5,14 @@ interface IProductDocument {
     _id: string
     productIdOnChain: string
     sellerId: Types.ObjectId
-    currencyType: "usdt" | "usdc" | "cshop" | "bnb"
+    currencyType: "USDT" | "USDC" | "CSHOP" | "BNB"
     currencyAddress: string
     name: string
     description: string
+    shippingCharges:number
     details: string
     images: string[]
-    shippingType: "global" | "local"
+    shippingType: "GLOBAL" | "LOCAL"
     status: "draft" | "published" | "archived" | "deleted"
     rating: number
     productAddress: string | null

@@ -2,12 +2,12 @@ import { Schema, model } from "mongoose"
 import IProductDocument from "../types/product.type"
 import Category from "../models/category.model"
 
-const addressSchema = new Schema({
-    address: { type: String, required: true, trim: true },
-    state: { type: String, required: true, trim: true },
-    country: { type: String, required: true, trim: true },
-    postalCode: { type: String, required: true, trim: true }
-})
+// const addressSchema = new Schema({
+//     address: { type: String, required: true, trim: true },
+//     state: { type: String, required: true, trim: true },
+//     country: { type: String, required: true, trim: true },
+//     postalCode: { type: String, required: true, trim: true }
+// })
 
 const productSchema = new Schema<IProductDocument>(
     {
@@ -15,13 +15,14 @@ const productSchema = new Schema<IProductDocument>(
         description: { type: String, required: true },
         details: { type: String, required: true },
         images: [ { type: String, required: true } ],
-        currencyType: { type: String, required: true, enum: ["usdt", "usdc", "cshop", "bnb"] },
-        shippingType: { type: String, required: true, default: "global" },
+        currencyType: { type: String, required: true, enum: ["USDT", "USDC", "CSHOP", "BNB"] },
+        shippingType: { type: String, required: true, enum: ["GLOBAL","LOCAL"] },
+        shippingCharges:{ type: Number, required: true, default: 0 },
         status: { type: String, required: true, default: "published" },
         rating: { type: Number, required: true, default: 0 },
         currencyAddress: { type: String, required: true },
         productIdOnChain: { type: String, required: true },
-        productAddress: { type: addressSchema },
+        // productAddress: { type: addressSchema },
         category: { type: Schema.Types.ObjectId, ref: Category, required: true },
         sellerId: { type: Schema.Types.ObjectId, ref: "User", required: true }
     },

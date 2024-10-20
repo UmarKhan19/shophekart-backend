@@ -8,7 +8,7 @@ const createProductSchema = z.object({
         sellerId: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Seller Id") })
             .uuid(validationErrorMessages.MISSING_ENTITY("Seller Id")),
-        currencyType: z.enum(["usdt", "usdc", "cshop", "bnb"], {
+        currencyType: z.enum(["USDT", "USDC", "CSHOP", "BNB"], {
             required_error: validationErrorMessages.MISSING_ENTITY("Currency Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Currency Type")
         }),
@@ -20,7 +20,7 @@ const createProductSchema = z.object({
         .array(z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Image URL") }))
         .min(1, validationErrorMessages.MISSING_ENTITY("At least one image"))
         .max(5, validationErrorMessages.INVALID_ENTITY("A maximum of 5 images")),
-        shippingType: z.enum(["local", "global"], {
+        shippingType: z.enum(["LOCAL", "GLOBAL"], {
             required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")
         }),
