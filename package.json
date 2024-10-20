@@ -60,6 +60,7 @@
         "typescript-eslint": "^8.8.1"
     },
     "dependencies": {
+        "cloudinary": "^1.41.3",
         "colorette": "^2.0.20",
         "connect-mongodb-session": "^5.0.0",
         "cors": "^2.8.5",
@@ -70,6 +71,8 @@
         "helmet": "^8.0.0",
         "mongodb-memory-server": "^10.1.1",
         "mongoose": "^8.7.0",
+        "multer": "^1.4.5-lts.1",
+        "multer-storage-cloudinary": "^4.0.0",
         "rate-limiter-flexible": "^5.0.3",
         "siwe": "^2.3.2",
         "source-map-support": "^0.5.21",
