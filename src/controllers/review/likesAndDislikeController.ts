@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // Add these functions to your existing review.controller.ts file
 import { Request, Response, NextFunction } from "express";
 import { Review } from "../../models";
@@ -7,10 +11,24 @@ import responseMessage from "../../constants/responseMessage";
 export const increaseLikeController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const reviewId = req.params.reviewId;
-    const review = await Review.findByIdAndUpdate(reviewId, { $inc: { likes: 1 } }, { new: true });
+    const {userId} = req.body;
+   
+
+    const review = await Review.findById(reviewId);
     if (!review) {
-      return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
-    }
+        return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
+      }
+      const alreadyLiked = await Review.findOne({
+        _id: reviewId,
+        likedBy: { $in: [userId] },
+      });
+      if (alreadyLiked) {
+        throw new Error("Already liked");
+
+      } 
+      await review.updateOne({ $inc: { likes: 1 }, $addToSet: { likedBy: userId } });
+
+
     httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Likes Increased"), review);
   } catch (error) {
     next(error);
@@ -20,12 +38,29 @@ export const increaseLikeController = async (req: Request, res: Response, next: 
 export const increaseDislikeController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const reviewId = req.params.reviewId;
-    const review = await Review.findByIdAndUpdate(reviewId, { $inc: { dislikes: 1 } }, { new: true });
+    const {userId} = req.body;
+    const review = await Review.findById(reviewId);
+
     if (!review) {
         return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
       }
-      httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Likes Increased"), review);
+    console.log("hy")
+
+    const alreadyDisliked = await Review.findOne({
+        _id: reviewId,
+        dislikedBy: { $in: [userId] },
+      });
+      
+   
+      
+      if (alreadyDisliked) {
+        throw new Error("Already disliked");
+    } 
+      await review.updateOne({ $inc: { dislikes: 1 }, $addToSet: { dislikedBy: userId } });
+
+      httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Dislikes Increased"), review);
     } catch (error) {
-    next(error);
+//    console.log(error);
+        next(error);
   }
 };

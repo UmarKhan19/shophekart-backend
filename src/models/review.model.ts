@@ -55,6 +55,8 @@ required:false
     type: Date,
     default: Date.now,
   },
+  likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who liked
+  dislikedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who disliked
 });
 
 // Define a method to populate the target details (User or Product)

@@ -10,7 +10,8 @@ export default interface IReviewDocument extends Document {
   likes: number;  // Number of likes on the review
   dislikes: number;  // Number of dislikes on the review
   replyNumber: number|undefined;  
-
+likedBy:ObjectId;
+dislikedBy:ObjectId;
   createdAt: Date;  // Timestamp when review was created
   updatedAt: Date;  // Timestamp when review was last updated
 }

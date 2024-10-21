@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 import { model, Schema } from "mongoose";
 import IReplyDocument from "../types/reply.type";
 import Review from "./review.model";
@@ -40,6 +39,8 @@ const replySchema: Schema<IReplyDocument> = new Schema<IReplyDocument>({
     type: Date,
     default: Date.now,
   },
+  likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who liked
+  dislikedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who disliked
 });
 
 export default model<IReplyDocument>("Reply", replySchema);

@@ -7,7 +7,8 @@ export default interface IReplyDocument extends Document {
   replyText: string;
   likes: number;
   dislikes: number;
-
+  likedBy:ObjectId;
+  dislikedBy:ObjectId;
   createdAt: Date;  // Timestamp when reply was created
   updatedAt: Date;  // Timestamp when reply was last updated
 }
