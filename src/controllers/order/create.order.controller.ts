@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { NextFunction, Request, Response } from "express"
 import { asyncHandler, httpError, httpResponse } from "../../utils"
 import { FixedProduct } from "../../models"
