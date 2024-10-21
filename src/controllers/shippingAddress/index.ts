@@ -11,17 +11,8 @@ import { TDeleteShippingAddress } from "../../validation/shippingAddress/delete.
 
 const ShippingAddressController = {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    create: asyncHandler(async (req: Request<{}, {}, TCreateShippingAddress["body"]>, res: Response, next: NextFunction) => {
-        const { address, buyerId, city, country, postalCode, state, isPrimary } = req.body
-
-        const usersAddresses: TShippingAddress[] = await ShippingAddressService.getUserShippingAddresses(new Types.ObjectId(buyerId))
-
-        const primaryAddress = usersAddresses.find((address) => address.isPrimary)
-
-        if (primaryAddress) {
-            httpError(next, new Error(responseMessage.ALREADY_EXISTS("Primary Address")), req, 400)
-            return
-        }
+    create: asyncHandler(async (req: Request<{}, {}, TCreateShippingAddress["body"]>, res: Response) => {
+        const { address, buyerId, city, country, postalCode, state, email, firstName, lastName, phoneNumber } = req.body
 
         const shippingAddress: TShippingAddress = await ShippingAddressService.create({
             address,
@@ -30,7 +21,10 @@ const ShippingAddressController = {
             country,
             postalCode,
             state,
-            isPrimary: isPrimary || false
+            email,
+            firstName,
+            lastName,
+            phoneNumber
         })
 
         httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("User Shipping Address"), shippingAddress)
@@ -60,24 +54,13 @@ const ShippingAddressController = {
     updateShippingAddress: asyncHandler(
         // eslint-disable-next-line @typescript-eslint/no-empty-object-type
         async (req: Request<{}, {}, TUpdateShippingAddress["body"]>, res: Response, next: NextFunction) => {
-            const { id, address, city, country, postalCode, state, isPrimary } = req.body
+            const { id, address, city, country, postalCode, state, email, firstName, lastName, phoneNumber } = req.body
 
             const { userId } = req.session as IMySessionData
 
             if (!userId) {
                 httpError(next, new Error(responseMessage.UNAUTHORIZED_ACCESS), req, 402)
                 return
-            }
-
-            const shippingAddresses = await ShippingAddressService.getUserShippingAddresses(userId)
-
-            const primaryAddress = shippingAddresses.find((addr) => addr.isPrimary)
-
-            if (isPrimary) {
-                if (primaryAddress && primaryAddress._id.toString() !== id) {
-                    httpError(next, new Error(responseMessage.ALREADY_EXISTS("Primary Address")), req, 400)
-                    return
-                }
             }
 
             const updatedAddress: TShippingAddress | null = await ShippingAddressService.updateshippingAddress({
@@ -87,8 +70,11 @@ const ShippingAddressController = {
                 country,
                 postalCode,
                 state,
-                isPrimary,
-                buyerId: userId
+                buyerId: userId,
+                email,
+                firstName,
+                lastName,
+                phoneNumber
             })
 
             if (!updatedAddress) {

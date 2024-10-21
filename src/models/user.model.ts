@@ -31,42 +31,7 @@ const userSchema = new Schema(
             unique: true,
             index: true
         },
-        /**
-         * The first name of the user.
-         *
-         * This field is optional and can be any string value.
-         */
-        firstName: {
-            type: String,
-            required: false
-        },
-        /**
-         * The last name of the user.
-         *
-         * This field is optional and can be any string value.
-         */
-        lastName: {
-            type: String,
-            required: false
-        },
-        /**
-         * The email address of the user.
-         *
-         * This field is optional and can be any string value.
-         */
-        email: {
-            type: String,
-            required: false
-        },
-        /**
-         * The phone number of the user.
-         *
-         * This field is optional and can be any string value.
-         */
-        phoneNumber: {
-            type: String,
-            required: false
-        },
+
         /**
          * The trust score of the user.
          *
@@ -96,10 +61,6 @@ const userSchema = new Schema(
  *
  * @property {string} _id - The unique identifier for the document.
  * @property {`0x${string}`} walletAddress - The user's wallet address, starting with '0x' followed by a string.
- * @property {string} [firstName] - The user's first name (optional).
- * @property {string} [lastName] - The user's last name (optional).
- * @property {string} [email] - The user's email address (optional).
- * @property {string} [phoneNumber] - The user's phone number (optional).
  * @property {number} trustScore - A numerical value representing the user's trust score.
  * @property {Date} createdAt - The date and time the document was created.
  * @property {Date} updatedAt - The date and time the document was last updated.

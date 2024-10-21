@@ -29,6 +29,7 @@ const logout = asyncHandler((req: Request, res: Response, next: NextFunction): v
          * If an error occurs while destroying the session, an httpError is thrown.
          */
         httpError(next, error, req, 500)
+        return
     })
 
     /**
