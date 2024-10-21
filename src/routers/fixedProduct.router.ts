@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 // routes/product/fixedProduct.route.ts
 import express from "express";
 import createFixedProductController from "../controllers/product/fixedProduct/fixedProduct.controller";
