@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
  
 /* eslint-disable @typescript-eslint/no-explicit-any */
  
@@ -14,7 +15,7 @@ const getSingleFixedProductController = asyncHandler(async (req: Request<Record<
 
     try {
       const { id } = req.params as { id: string };
-    
+    console.log(id);
       const fixedProduct = await getSingleFixedProduct(id);
       res.status(200).json({ message: responseMessage.FETCHED_SUCCESSFULLY("Fixed Product"), fixedProduct });
     } catch (error) {
