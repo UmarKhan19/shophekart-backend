@@ -22,7 +22,7 @@ const reviewSchema: Schema<IReviewDocument> = new Schema<IReviewDocument>({
   },
   reviewType: {
     type: String,
-    enum: ["positive", "neutral", "negative", "productReview", "userReview"],
+    enum: ["positive", "neutral", "negative"],
     required: true,
   },
   rating: {
