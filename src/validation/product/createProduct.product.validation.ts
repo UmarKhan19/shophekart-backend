@@ -3,7 +3,6 @@ import validationErrorMessages from "../../constants/validationErrors"
 
 const createProductSchema = z.object({
     body: z.object({
-        
         productIdOnChain: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id On Chain") }),
         sellerId: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Seller Id") })
@@ -17,18 +16,16 @@ const createProductSchema = z.object({
         description: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Description") }),
         details: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Details") }),
         images: z
-        .array(z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Image URL") }))
-        .min(1, validationErrorMessages.MISSING_ENTITY("At least one image"))
-        .max(5, validationErrorMessages.INVALID_ENTITY("A maximum of 5 images")),
+            .array(z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Image URL") }))
+            .min(1, validationErrorMessages.MISSING_ENTITY("At least one image"))
+            .max(5, validationErrorMessages.INVALID_ENTITY("A maximum of 5 images")),
         shippingType: z.enum(["LOCAL", "GLOBAL"], {
             required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")
         }),
-        productAddress: z.object({
-            address: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Address") }),
-            state: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("State") }),
-            country: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Country") }),
-            postalCode: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Postal Code") })
+        productAddress: z.string({
+            required_error: validationErrorMessages.MISSING_ENTITY("Product Address"),
+            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Product Address")
         }),
         category: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Category") })
