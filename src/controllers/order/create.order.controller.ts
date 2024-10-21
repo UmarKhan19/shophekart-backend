@@ -35,7 +35,7 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
 
     // Save the updated product
     await product.save();
-    httpResponse(req, res, 201, responseMessage.SUCCESSFUL_OPERATION("Order creation"), order)
+    httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("Order"), order)
 })
 
 export default createOrder
