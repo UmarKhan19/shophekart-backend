@@ -24,6 +24,8 @@ const createProductSchema = z.object({
             required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")
         }),
+        shippingDuration:z.number({required_error: validationErrorMessages.MISSING_ENTITY("Shipping Duration")}),
+        shippingCharges:z.number({required_error: validationErrorMessages.MISSING_ENTITY("Shipping Charges")}),
         productAddress: z.object({
             address: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Address") }),
             state: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("State") }),

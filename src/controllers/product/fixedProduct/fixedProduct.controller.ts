@@ -25,6 +25,8 @@ const createFixedProductController = asyncHandler(async (req: Request<{}, {}, IC
     sellerId,
     shippingType,
     stock,
+    shippingCharges,
+    shippingDuration,
   } = req.body;
 console.log(req.body);
   // Handle images uploaded by Multer (req.files is an array of image file details)
@@ -44,6 +46,8 @@ console.log(images);
     sellerId: new Types.ObjectId(sellerId),
     shippingType,
     stock,
+    shippingCharges,
+    shippingDuration
   });
 
   httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("Fixed Product"), fixedProduct);
