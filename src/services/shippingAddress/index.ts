@@ -20,7 +20,6 @@ const ShippingAddressService = {
 
     async getUserShippingAddresses(userId: Types.ObjectId): Promise<TShippingAddress[]> {
         const shippingAddresses = await ShippingAddress.find({ buyerId: userId })
-
         return shippingAddresses
     },
 

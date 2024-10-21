@@ -41,6 +41,32 @@ const updateShippingAddressSchema = z.object({
             .optional(),
         isPrimary: z.boolean().optional(),
 
+        firstName: z
+            .string({
+                required_error: validationErrorMessages.MISSING_ENTITY("First Name"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("First Name")
+            })
+            .max(50, validationErrorMessages.MAX_VALUE("First Name", 50)),
+
+        lastName: z
+            .string({
+                required_error: validationErrorMessages.MISSING_ENTITY("Last Name"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("Last Name")
+            })
+            .max(50, validationErrorMessages.MAX_VALUE("Last Name", 50)),
+
+        email: z
+            .string({
+                required_error: validationErrorMessages.MISSING_ENTITY("Email"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("Email")
+            })
+            .email(validationErrorMessages.INVALID_ENTITY("Email")),
+
+        phoneNumber: z.string({
+            required_error: validationErrorMessages.MISSING_ENTITY("Phone Number"),
+            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Phone Number")
+        }),
+
         id: z
             .string({
                 required_error: validationErrorMessages.MISSING_ENTITY("_id"),

@@ -3,7 +3,7 @@ import IFixedProductDocument from "../../../types/fixedProduct.type"
 
 const getAllFixedProducts = async (): Promise<IFixedProductDocument[]> => {
     try {
-        const fixedProducts = (await FixedProduct.find({}))
+        const fixedProducts = await FixedProduct.find({})
 
         return fixedProducts
     } catch (error) {

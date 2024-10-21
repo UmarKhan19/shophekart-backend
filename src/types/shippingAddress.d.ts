@@ -9,7 +9,10 @@ type TShippingAddress = {
     postalCode: string
     country: string
     buyerId: Types.ObjectId
-    isPrimary: boolean
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: string
     createdAt: Date
     updatedAt: Date
 }

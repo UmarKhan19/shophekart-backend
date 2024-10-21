@@ -14,20 +14,38 @@ const shippingAddressSchema = new mongoose.Schema<TShippingAddress>(
             trim: true,
             lowercase: true
         },
+        firstName: {
+            type: String,
+            required: false,
+            trim: true
+        },
+        lastName: {
+            type: String,
+            required: false,
+            trim: true
+        },
+        email: {
+            type: String,
+            required: false,
+            trim: true
+        },
+        phoneNumber: {
+            type: String,
+            required: false,
+            trim: true
+        },
         buyerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: [true, "Buyer ID is required"]
+            required: [true, "Buyer ID is required"],
+            unique: true,
+            trim: true
         },
         country: {
             type: String,
             required: [true, "Country is required"],
             trim: true,
             lowercase: true
-        },
-        isPrimary: {
-            type: Boolean,
-            default: false
         },
         postalCode: {
             type: String,
