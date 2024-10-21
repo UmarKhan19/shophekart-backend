@@ -7,15 +7,15 @@ import User from "./user.model";
 const reviewSchema: Schema<IReviewDocument> = new Schema<IReviewDocument>({
     targetType: {
     type: String,
-    enum: ["Product", "User"], // It can be either 'Product' or 'User'
+    enum: ["product", "user"], // It can be either 'Product' or 'User'
     required: true,
   },
-  target_id: {
+  targetId: {
     type: Schema.Types.ObjectId,
     refPath: "targetType",
     required: true,
   },
-  reviewer_id: {
+  reviewerId: {
     type: Schema.Types.ObjectId,
     ref: User, // The reviewer is always a User
     required: true,
