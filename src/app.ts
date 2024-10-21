@@ -5,8 +5,7 @@ import path from "path"
 import globalErrorHandler from "./middlewares/globalErrorHandler.middleware"
 import responseMessage from "./constants/responseMessage"
 import httpError from "./utils/httpError.util"
-import { categoryRouter, fixedProductRouter, healthRouter, productRouter,orderRouter, userRouter } from "./routers"
-
+import { categoryRouter, fixedProductRouter, healthRouter, orderRouter, productRouter, shippingAddressRouter, userRouter } from "./routers"
 import helmet from "helmet"
 import cors from "cors"
 import { ALLOWED_ORIGINS } from "./constants/application"
@@ -59,6 +58,7 @@ app.use("/api/v1/product", productRouter)
 app.use("/api/v1/category", categoryRouter)
 app.use("/api/v1/fixedProduct", fixedProductRouter)
 app.use("/api/v1/order", orderRouter)
+app.use("/api/v1/shipping-address", shippingAddressRouter)
 
 app.use("/api/v1/review",reviewRouter)
 // 404 Handler

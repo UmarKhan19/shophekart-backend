@@ -34,7 +34,9 @@ const validationErrorMessages = {
      *
      * @type {string}
      */
-    MIN_VALUE: (entity: string, minValue: number) => `The ${entity} must be at least ${minValue}.`
+    MIN_VALUE: (entity: string, minValue: number) => `The ${entity} must be at least ${minValue}.`,
+
+    MAX_VALUE: (entity: string, maxValue: number) => `The ${entity} cannot be longer than ${maxValue} characters.`
 }
 
 export default validationErrorMessages

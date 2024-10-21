@@ -41,7 +41,7 @@ const SiweAuthController = asyncHandler(
 
             mySession.userData = data
 
-            const user = await User.findOne({ where: { walletAddress: mySession.userData.address } })
+            const user = await User.findOne({ walletAddress: mySession.userData.address })
 
             if (user) {
                 mySession.userId = user._id
@@ -51,7 +51,7 @@ const SiweAuthController = asyncHandler(
             }
 
             mySession.cookie.expires = new Date(siweMessage.expirationTime ?? Date.now() + 24 * 60 * 60 * 1000)
-            mySession.save(() => httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Nonce verification"), null))
+            mySession.save(() => httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("User sign in"), null))
         } catch (e) {
             mySession.userData = null
             mySession.nonce = null
