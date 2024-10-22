@@ -12,12 +12,8 @@ const createOrderSchema = object({
                 deliveryDate.setHours(0, 0, 0, 0)
                 return deliveryDate >= today
             }, validationErrorMessages.INVALID_ENTITY("Delivery date")),
-        buyerId: string({ required_error: validationErrorMessages.MISSING_ENTITY("Buyer Id") }).uuid(
-            validationErrorMessages.INVALID_ENTITY("Buyer Id")
-        ),
-        productId: string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id") }).uuid(
-            validationErrorMessages.INVALID_ENTITY("Product Id")
-        ),
+        buyerId: string({ required_error: validationErrorMessages.MISSING_ENTITY("Buyer Id") }),
+        productId: string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id") }),
         productIdOnChain: string({ required_error: validationErrorMessages.MISSING_ENTITY("Product Id On Chain") }),
         tokenId: number({ required_error: validationErrorMessages.MISSING_ENTITY("Token Id") }).min(
             1,

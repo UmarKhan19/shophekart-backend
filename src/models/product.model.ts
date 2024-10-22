@@ -22,6 +22,7 @@ const productSchema = new Schema<IProductDocument>(
         rating: { type: Number, required: true, default: 0 },
         currencyAddress: { type: String, required: true },
         productIdOnChain: { type: String, required: true },
+        shippingDuration:{type: Number,required:true},
         // productAddress: { type: addressSchema },
         category: { type: Schema.Types.ObjectId, ref: Category, required: true },
         sellerId: { type: Schema.Types.ObjectId, ref: "User", required: true }

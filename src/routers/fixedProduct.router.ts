@@ -14,6 +14,6 @@ const router = express.Router();
 
 router.route("/create").post(upload.array("images", 5),  createFixedProductController); 
 router.route("/getAll").get(fetchFixedProductController);
-router.get("/:id", validateSchema(getSingleProductSchema), getSingleFixedProductController);
+router.route("/:id").get(validateSchema(getSingleProductSchema), getSingleFixedProductController);
 
 export default router;

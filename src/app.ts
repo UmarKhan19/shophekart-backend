@@ -13,6 +13,7 @@ import Session from "express-session"
 import mongoDBStore from "connect-mongodb-session"
 import { config } from "./config"
 import reviewRouter from "./routers/review.router"
+import replyRouter from "./routers/reply.router"
 
 const app: Application = express()
 
@@ -59,7 +60,7 @@ app.use("/api/v1/category", categoryRouter)
 app.use("/api/v1/fixedProduct", fixedProductRouter)
 app.use("/api/v1/order", orderRouter)
 app.use("/api/v1/shipping-address", shippingAddressRouter)
-
+app.use("/api/v1/reply",replyRouter)
 app.use("/api/v1/review",reviewRouter)
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {

@@ -1,4 +1,6 @@
-// getSingleFixedProduct.service.ts
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FixedProduct } from "../../../models"
 import IFixedProductDocument from "../../../types/fixedProduct.type"
 import responseMessage from "../../../constants/responseMessage"

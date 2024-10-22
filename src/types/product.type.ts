@@ -10,6 +10,7 @@ interface IProductDocument {
     name: string
     description: string
     shippingCharges:number
+    shippingDuration:number
     details: string
     images: string[]
     shippingType: "GLOBAL" | "LOCAL"

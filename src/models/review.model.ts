@@ -7,22 +7,22 @@ import User from "./user.model";
 const reviewSchema: Schema<IReviewDocument> = new Schema<IReviewDocument>({
     targetType: {
     type: String,
-    enum: ["Product", "User"], // It can be either 'Product' or 'User'
+    enum: ["product", "user"], // It can be either 'Product' or 'User'
     required: true,
   },
-  target_id: {
+  targetId: {
     type: Schema.Types.ObjectId,
     refPath: "targetType",
     required: true,
   },
-  reviewer_id: {
+  reviewerId: {
     type: Schema.Types.ObjectId,
     ref: User, // The reviewer is always a User
     required: true,
   },
   reviewType: {
     type: String,
-    enum: ["positive", "neutral", "negative", "productReview", "userReview"],
+    enum: ["positive", "neutral", "negative"],
     required: true,
   },
   rating: {
@@ -55,6 +55,8 @@ required:false
     type: Date,
     default: Date.now,
   },
+  likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who liked
+  dislikedBy: [{ type: Schema.Types.ObjectId, ref: "User" }], // Store ID of users who disliked
 });
 
 // Define a method to populate the target details (User or Product)

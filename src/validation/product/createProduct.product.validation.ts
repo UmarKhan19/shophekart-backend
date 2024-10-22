@@ -23,9 +23,13 @@ const createProductSchema = z.object({
             required_error: validationErrorMessages.MISSING_ENTITY("Shipping Type"),
             invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Type")
         }),
-        productAddress: z.string({
-            required_error: validationErrorMessages.MISSING_ENTITY("Product Address"),
-            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Product Address")
+        shippingDuration:z.number({required_error: validationErrorMessages.MISSING_ENTITY("Shipping Duration")}),
+        shippingCharges:z.number({required_error: validationErrorMessages.MISSING_ENTITY("Shipping Charges")}),
+        productAddress: z.object({
+            address: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Address") }),
+            state: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("State") }),
+            country: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Country") }),
+            postalCode: z.string({ required_error: validationErrorMessages.MISSING_ENTITY("Postal Code") })
         }),
         category: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Category") })
