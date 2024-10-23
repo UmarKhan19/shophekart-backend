@@ -37,8 +37,7 @@ router
  */
 router.route("/search").get(searchProductController);
 router.route("/all").get(getAllProductsController)
-router
-    .route("/:id/delete")
+router.route("/:id/delete")
     /**
      * Deletes a product.
      *
