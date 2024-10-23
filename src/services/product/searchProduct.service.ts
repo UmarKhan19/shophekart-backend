@@ -17,9 +17,10 @@ export default async function searchFixedProductsByName(searchTerm: string) {
 
     // Perform case-insensitive search with regex for products whose names start with the search term
     const fixedProducts = await FixedProduct.find({
-        name: { $regex: new RegExp("^" + searchTerm, "i") } // ^ for startsWith, 'i' for case-insensitive
+        name: { $regex:  `${searchTerm}$`,$options: "i" } // ^ for startsWith, 'i' for case-insensitive
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    }).populate("category"); // Optionally populate category if needed
+    }); // Optionally populate category if needed
 
     return fixedProducts;
 }
+    
