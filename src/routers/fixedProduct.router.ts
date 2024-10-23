@@ -9,6 +9,7 @@ import { getSingleProductSchema } from "../validation/product/fixedProduct/getSi
 import upload from "../middlewares/multer.middleware"
 
 const router = express.Router()
+router.route("/search").get(searchProductController)
 
 router.route("/create").post(upload.array("images", 5), createFixedProductController)
 router.route("/getAll").get(fetchFixedProductController)
