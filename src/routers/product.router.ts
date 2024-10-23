@@ -8,6 +8,7 @@ import getSingleProductController from "../controllers/product/getSingleProduct.
 import getProductsByCategoryController from "../controllers/product/getProductsByCategory.controller"
 import { getSingleProductSchema } from "../validation/product/getSingleProduct.validation"
 import getAllProductsController from "../controllers/product/getAllProduct.product.controller"
+import searchProductController from "../controllers/product/searchProduct.controller"
 
 const router: Router = Router()
 
@@ -34,7 +35,7 @@ router
  * @returns {IProductDocument[]} products - List of products
  * @throws {Error} If failed to get products
  */
-
+router.route("/search").get(searchProductController);
 router.route("/all").get(getAllProductsController)
 router
     .route("/:id/delete")
