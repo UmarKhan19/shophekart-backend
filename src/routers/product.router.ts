@@ -8,6 +8,8 @@ import getSingleProductController from "../controllers/product/getSingleProduct.
 import getProductsByCategoryController from "../controllers/product/getProductsByCategory.controller"
 import { getSingleProductSchema } from "../validation/product/getSingleProduct.validation"
 import getAllProductsController from "../controllers/product/getAllProduct.product.controller"
+import updateProductOnChainId from "../controllers/product/updateOnChainId.product.controller"
+import { updateProductOnChainIdSchema } from "../validation/product"
 
 const router: Router = Router()
 
@@ -85,6 +87,8 @@ router
      * @returns {Promise<void>}
      */
     .get(getProductsByCategoryController) // Add the new route
+
+router.route("/:id/update-on-chain-id").put(validateSchema(updateProductOnChainIdSchema), updateProductOnChainId)
 
 /**
  * Exports the product router.

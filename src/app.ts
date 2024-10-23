@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
- 
 import express, { Application, NextFunction, Request, Response } from "express"
 import path from "path"
 import globalErrorHandler from "./middlewares/globalErrorHandler.middleware"
@@ -32,10 +30,8 @@ app.use(
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../", "public")))
 
- 
 const MongoDBStore = mongoDBStore(Session)
 
- 
 const sessionStore = new MongoDBStore({
     uri: config.DATABASE_URL as string,
     collection: "user-sessions"
@@ -60,8 +56,8 @@ app.use("/api/v1/category", categoryRouter)
 app.use("/api/v1/fixedProduct", fixedProductRouter)
 app.use("/api/v1/order", orderRouter)
 app.use("/api/v1/shipping-address", shippingAddressRouter)
-app.use("/api/v1/reply",replyRouter)
-app.use("/api/v1/review",reviewRouter)
+app.use("/api/v1/reply", replyRouter)
+app.use("/api/v1/review", reviewRouter)
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {
     try {
