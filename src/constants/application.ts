@@ -9,10 +9,17 @@ export enum EApplicationEnvironment {
 export const ALLOWED_ORIGINS: string = config.CLIENT_URL as string
 
 export enum ORDER_STATUS {
-    PENDING = "pending",
-    PROCESSING = "processing",
-    DELIVERED = "delivered",
-    CANCELLED = "cancelled"
+    AWAITING_SHIPMENT = "pending",
+    AWAITING_DELIVERY = "delivering",
+    COMPLETE = "delivered",
+    CANCEL = "cancelled",
+    DISPUTE = "dispute"
 }
 
-export const ORDER_STATUS_VALUES = [ORDER_STATUS.PENDING, ORDER_STATUS.PROCESSING, ORDER_STATUS.DELIVERED, ORDER_STATUS.CANCELLED] as const
+export const ORDER_STATUS_VALUES = [
+    ORDER_STATUS.AWAITING_SHIPMENT,
+    ORDER_STATUS.AWAITING_DELIVERY,
+    ORDER_STATUS.COMPLETE,
+    ORDER_STATUS.CANCEL,
+    ORDER_STATUS.DISPUTE
+] as const
