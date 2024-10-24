@@ -5,6 +5,7 @@
 import { Schema, model } from "mongoose"
 import { Types } from "mongoose"
 import { TOrder } from "../types"
+import { ORDER_STATUS_VALUES } from "../constants/application"
 
 /**
  * Define the schema for the Order model.
@@ -32,7 +33,7 @@ const orderSchema = new Schema(
         orderStatus: {
             type: String,
             required: true,
-            enum: ["pending", "shipped", "delivered", "cancelled"]
+            enum: ORDER_STATUS_VALUES
         },
 
         /**
@@ -91,18 +92,14 @@ const orderSchema = new Schema(
          * @required
          */
         productIdOnChain: {
-            type: String,
+            type: Number,
             required: true
         },
 
-        /**
-         * The token ID.
-         * @type {Number}
-         * @required
-         */
-        tokenId: {
+        nftId: {
             type: Number,
-            required: true
+            required: true,
+            default: 0
         },
 
         /**
