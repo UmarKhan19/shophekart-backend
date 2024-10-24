@@ -5,7 +5,7 @@
 // Add these functions to your existing review.controller.ts file
 import { Request, Response, NextFunction } from "express";
 import { Review } from "../../models";
-import { httpResponse } from "../../utils";
+import { httpError, httpResponse } from "../../utils";
 import responseMessage from "../../constants/responseMessage";
 
 export const increaseLikeController = async (req: Request, res: Response, next: NextFunction) => {
@@ -23,8 +23,8 @@ export const increaseLikeController = async (req: Request, res: Response, next: 
         likedBy: { $in: [userId] },
       });
       if (alreadyLiked) {
-        throw new Error("Already liked");
-
+        httpError(next,  new Error("Already liked"), req,400)
+return
       } 
       await review.updateOne({ $inc: { likes: 1 }, $addToSet: { likedBy: userId } });
 
@@ -44,7 +44,6 @@ export const increaseDislikeController = async (req: Request, res: Response, nex
     if (!review) {
         return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
       }
-    console.log("hy")
 
     const alreadyDisliked = await Review.findOne({
         _id: reviewId,
@@ -54,7 +53,8 @@ export const increaseDislikeController = async (req: Request, res: Response, nex
    
       
       if (alreadyDisliked) {
-        throw new Error("Already disliked");
+        httpError(next,new Error("Already disliked"), req,400)
+        return
     } 
       await review.updateOne({ $inc: { dislikes: 1 }, $addToSet: { dislikedBy: userId } });
 
