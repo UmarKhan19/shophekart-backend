@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 // product.router.ts
 import { Router } from "express"
 import { validateSchema } from "../middlewares"
@@ -10,7 +11,6 @@ import { getSingleProductSchema } from "../validation/product/getSingleProduct.v
 import getAllProductsController from "../controllers/product/getAllProduct.product.controller"
 import updateProductOnChainId from "../controllers/product/updateOnChainId.product.controller"
 import { updateProductOnChainIdSchema } from "../validation/product"
-import searchProductController from "../controllers/product/searchProduct.controller"
 
 const router: Router = Router()
 
@@ -37,10 +37,8 @@ router
  * @returns {IProductDocument[]} products - List of products
  * @throws {Error} If failed to get products
  */
-router.route("/search").get(searchProductController)
 router.route("/all").get(getAllProductsController)
-router
-    .route("/:id/delete")
+router.route("/:id/delete")
     /**
      * Deletes a product.
      *

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Request, Response } from "express";
 import { asyncHandler, httpResponse } from "../../utils";
 import searchProductsByName from "../../services/product/searchProduct.service";
@@ -15,7 +16,7 @@ const searchProductController = asyncHandler(async (req: Request, res: Response)
     const products = await searchProductsByName(query);
 
     // Respond with the found products
-    httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("Products"), products);
+    httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("Fixed Products"), products);
 });
 
 export default searchProductController;
