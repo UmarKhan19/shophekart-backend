@@ -6,15 +6,16 @@ import { config } from "./config"
 import databaseService from "./services/database.service"
 import logger from "./utils/logger.util"
 
-const PORT = config.PORT || 8000;
+const PORT = config.PORT || 8080
 
-databaseService.connect()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log("app is listening on port " + PORT);
-    });
-  })
-  .catch((error) => {
-    logger.error("Error in connecting to database");
-    logger.error(error);
-  });
+databaseService
+    .connect()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log("app is listening on port " + PORT)
+        })
+    })
+    .catch((error) => {
+        logger.error("Error in connecting to database")
+        logger.error(error)
+    })
