@@ -7,8 +7,10 @@ import fetchFixedProductController from "../controllers/product/fixedProduct/fet
 import getSingleFixedProductController from "../controllers/product/fixedProduct/getSingleFixedProduct.controller"
 import { getSingleProductSchema } from "../validation/product/fixedProduct/getSingleProductValidation"
 import upload from "../middlewares/multer.middleware"
+import searchProductController from "../controllers/product/searchProduct.controller"
 
 const router = express.Router()
+router.route("/search").get(searchProductController)
 
 router.route("/create").post(upload.array("images", 5), createFixedProductController)
 router.route("/getAll").get(fetchFixedProductController)
