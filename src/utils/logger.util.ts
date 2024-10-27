@@ -74,7 +74,7 @@ const fileLogFormat = format.printf((info): string => {
 })
 
 const consoleTransport = (): Array<ConsoleTransportInstance> => {
-    if (config.ENV === EApplicationEnvironment.DEVELOPMENT) {
+    if (config.ENV !== EApplicationEnvironment.TEST) {
         return [
             new transports.Console({
                 level: "info",
