@@ -18,7 +18,7 @@ import { ORDER_STATUS } from "../constants/application"
  * @property {Types.ObjectId} buyerId - The ID of the buyer associated with the order.
  * @property {Types.ObjectId} productId - The ID of the product associated with the order.
  * @property {string} productIdOnChain - The product ID on the blockchain.
- * @property {number} tokenId - The ID of the token associated with the order.
+ * @property {number} nftId - The ID of the token associated with the order.
  * @property {number} soldAtPrice - The price at which the product was sold.
  * @property {number} shippingPrice - The shipping cost associated with the order.
  * @property {Date} createdAt - The timestamp when the order was created.
@@ -33,6 +33,7 @@ type TOrder = {
      * 'pending', 'shipped', 'delivered', 'cancelled'
      */
     orderStatus: ORDER_STATUS
+    shippingAddress: Types.ObjectId;
 
     /**
      * The expected delivery date of the order.
@@ -64,15 +65,9 @@ type TOrder = {
      * @example
      * '1'
      */
-    productIdOnChain: string
+    productIdOnChain: number
 
-    /**
-     * The ID of the token associated with the order.
-     *
-     * @example
-     * 123
-     */
-    tokenId: number
+    nftId: number
 
     /**
      * The price at which the product was sold.

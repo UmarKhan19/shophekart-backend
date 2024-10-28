@@ -9,10 +9,12 @@ const verifyNonceParamsSchema = z.object({
         }),
         message: z.object({
             address: z.string({
-                required_error: validationErrorMessages.MISSING_ENTITY("Address")
+                required_error: validationErrorMessages.MISSING_ENTITY("Address"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("Address")
             }),
             chainId: z.number({
-                required_error: validationErrorMessages.MISSING_ENTITY("ChainId")
+                required_error: validationErrorMessages.MISSING_ENTITY("ChainId"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("ChainId")
             }),
             issuedAt: z.string({
                 required_error: validationErrorMessages.MISSING_ENTITY("IssuedAt")
@@ -26,11 +28,13 @@ const verifyNonceParamsSchema = z.object({
             statement: z.string().optional(),
             uri: z.string().optional(),
             version: z.string({
-                required_error: validationErrorMessages.MISSING_ENTITY("Version")
+                required_error: validationErrorMessages.MISSING_ENTITY("Version"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("Version")
             }),
             domain: z.string().optional(),
             nonce: z.string({
-                required_error: validationErrorMessages.MISSING_ENTITY("Nonce")
+                required_error: validationErrorMessages.MISSING_ENTITY("Nonce"),
+                invalid_type_error: validationErrorMessages.INVALID_ENTITY("Nonce")
             })
         })
     })

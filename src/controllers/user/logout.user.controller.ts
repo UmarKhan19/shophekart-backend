@@ -25,17 +25,20 @@ const logout = asyncHandler((req: Request, res: Response, next: NextFunction): v
      * @param {function} callback - A callback function to handle the result of destroying the session.
      */
     req.session.destroy((error: Error) => {
-        /**
-         * If an error occurs while destroying the session, an httpError is thrown.
-         */
-        httpError(next, error, req, 500)
-        return
+        if (error) {
+            /**
+             * If an error occurs while destroying the session, an httpError is thrown.
+             */
+            httpError(next, error, req, 500)
+            return
+        } else {
+            /**
+             * Sends a successful response to the client if the session is destroyed successfully.
+             */
+            httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("User logout"), null)
+            return
+        }
     })
-
-    /**
-     * Sends a successful response to the client if the session is destroyed successfully.
-     */
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("User logout"), null)
 })
 
 export default logout

@@ -14,7 +14,7 @@ interface IProductDocument {
     details: string
     images: string[]
     shippingType: "GLOBAL" | "LOCAL"
-    status: "draft" | "published" | "archived" | "deleted"
+    status: "draft" | "published" | "archived" | "deleted" | "out of stock"
     rating: number
     productAddress: string
     category: Types.ObjectId
