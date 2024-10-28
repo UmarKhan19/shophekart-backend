@@ -33,6 +33,7 @@ type TOrder = {
      * 'pending', 'shipped', 'delivered', 'cancelled'
      */
     orderStatus: ORDER_STATUS
+    shippingAddress: Types.ObjectId;
 
     /**
      * The expected delivery date of the order.

@@ -38,7 +38,6 @@ const shippingAddressSchema = new mongoose.Schema<TShippingAddress>(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: [true, "Buyer ID is required"],
-            unique: true,
             trim: true
         },
         country: {

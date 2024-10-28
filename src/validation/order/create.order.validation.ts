@@ -1,8 +1,16 @@
-import { number, object, string, TypeOf } from "zod"
+import { number, object, string, TypeOf} from "zod"
 import validationErrorMessages from "../../constants/validationErrors"
+import { ShippingAddress } from "../../models";
 
 const createOrderSchema = object({
     body: object({
+        shippingAddress: string({
+          required_error: validationErrorMessages.MISSING_ENTITY("Shipping Address"),
+          invalid_type_error: validationErrorMessages.INVALID_ENTITY("Shipping Address"),
+        })
+        .refine((addressId) => {
+          return ShippingAddress.findById(addressId).then((address) => address !== null);
+        }, validationErrorMessages.INVALID_ENTITY("Shipping Address")),
         deliveryBy: string({ required_error: validationErrorMessages.MISSING_ENTITY("Delivery date") })
             .date()
             .refine((date) => {

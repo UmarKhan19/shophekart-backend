@@ -6,17 +6,13 @@ const ShippingAddressService = {
     async create(
         data: Omit<
             TShippingAddress,
-            keyof {
-                _id: Types.ObjectId
-                createdAt: Date
-                updatedAt: Date
-            }
+            keyof { _id: Types.ObjectId; createdAt: Date; updatedAt: Date }
         >
     ): Promise<TShippingAddress> {
-        const shippingAddress = await ShippingAddress.create(data)
-
-        return shippingAddress
+        const shippingAddress = await ShippingAddress.create(data);
+        return shippingAddress;
     },
+    
 
     async getUserShippingAddresses(userId: Types.ObjectId): Promise<TShippingAddress[]> {
         const shippingAddresses = await ShippingAddress.find({ buyerId: userId })

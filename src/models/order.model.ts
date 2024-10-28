@@ -42,6 +42,12 @@ const orderSchema = new Schema(
          * @required
          * @description The delivery date should be in the future.
          */
+        
+            shippingAddress: {
+              type: Types.ObjectId,
+              ref: "ShippingAddress",
+              required: true,
+            },
         deliveryBy: {
             type: Date,
             required: true,
