@@ -6,8 +6,6 @@ import getSingleProduct from "../../services/product/getSingleProduct.product.se
 const getSingleProductController = asyncHandler(async (req: Request, res: Response) => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const productId = req.params.id as string
-    // eslint-disable-next-line no-console
-    console.log(productId)
     const product = await getSingleProduct(productId)
     httpResponse(req, res, 200, responseMessage.DATA_RETRIEVED_SUCCESSFULLY("Product"), product)
 })
