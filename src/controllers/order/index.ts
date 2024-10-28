@@ -3,5 +3,6 @@ export { default as getAllOrdersOfLoggedinUser } from "./getAllOfUser.order.cont
 export { default as changeStatus } from "./changeStatus.order.controller"
 export { default as getSingleOrder } from "./getSingle.order.controller"
 export { default as getSellerOrderHistory } from "./getSellerHistory.order.controller"
+export { default as getBuyerOrderHistory } from "./getBuyerHistory.order.controller"
 export { default as updateNftId } from "./udpateNftId.order.controller"
 export { default as deleteOrder } from "./delete.order.controller"

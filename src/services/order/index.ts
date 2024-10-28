@@ -3,5 +3,6 @@ export { default as getAllOrdersOfLoggedinUserService } from "./getAllOrdersOfLo
 export { default as updateOrderStatusService } from "./updateOrderStatus.order.service"
 export { default as getSingleOrderService } from "./getSingle.order.service"
 export { default as getSellerHistoryService } from "./getSellerHistory.order.service"
+export { default as getBuyerHistoryService } from "./getBuyerHistory.order.service"
 export { default as updateNftIdService } from "./updateNftId.order.service"
 export { default as deleteOrderService } from "./delete.order.service"
