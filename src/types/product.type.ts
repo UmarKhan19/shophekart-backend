@@ -6,7 +6,7 @@ interface IProductDocument {
     productIdOnChain: number
     sellerId: Types.ObjectId
     currencyType: "USDT" | "USDC" | "CSHOP" | "BNB"
-    currencyAddress: string
+    currencyAddress: string;
     name: string
     description: string
     shippingCharges: number
