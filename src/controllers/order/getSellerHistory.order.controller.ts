@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { NextFunction, Request, Response } from "express"
 import { asyncHandler, httpError, httpResponse } from "../../utils"
 import responseMessage from "../../constants/responseMessage"

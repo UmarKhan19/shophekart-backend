@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -35,7 +36,7 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
         soldAtPrice: product.price ?? 0
     })
     product.stock -= 1
-
+console.log(2323)
     // Save the updated product
     await product.save()
     httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("Order"), order)
