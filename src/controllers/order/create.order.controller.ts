@@ -10,7 +10,7 @@ import { createOrderService } from "../../services/order"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"]>, res: Response, next: NextFunction) => {
-    const { buyerId, deliveryBy, productId, shippingPrice, productIdOnChain } = req.body
+    const { buyerId, deliveryBy, productId, shippingPrice, productIdOnChain,shippingAddress } = req.body
 
     const product = await FixedProduct.findById(productId)
 
@@ -30,6 +30,8 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
         productId,
         shippingPrice,
         productIdOnChain,
+        shippingAddress,
+
         soldAtPrice: product.price ?? 0
     })
     product.stock -= 1

@@ -9,7 +9,8 @@ export default async function ({
     productId,
     shippingPrice,
     productIdOnChain,
-    soldAtPrice
+    soldAtPrice,
+    shippingAddress
 }: TCreateOrder["body"] & { soldAtPrice: number }) {
     const order = await Order.create({
         buyerId,
@@ -18,7 +19,8 @@ export default async function ({
         productId,
         productIdOnChain,
         shippingPrice,
-        soldAtPrice
+        soldAtPrice,
+        shippingAddress
     })
 
     if (!order) throw new Error(responseMessage.OPERATION_FAILED("Order creation"))
