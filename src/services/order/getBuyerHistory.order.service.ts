@@ -1,9 +1,8 @@
 import { Types } from "mongoose"
 import { Order } from "../../models"
-import { TOrderHistory } from "../../types"
 
-export default async function getBuyerHistoryService(userId: Types.ObjectId): Promise<TOrderHistory[]> {
-    const orders: TOrderHistory[] = await Order.aggregate([
+export default async function getBuyerHistoryService(userId: Types.ObjectId): Promise<TBuyerOrderHistory[]> {
+    return await Order.aggregate<TBuyerOrderHistory>([
         {
             $lookup: {
                 from: "products",
@@ -55,6 +54,24 @@ export default async function getBuyerHistoryService(userId: Types.ObjectId): Pr
             }
         }
     ])
+}
 
-    return orders
+type TBuyerOrderHistory = {
+    _id: string
+    nftId: number
+    soldAtPrice: number
+    buyerId: Types.ObjectId
+    productIdOnChain: number
+    shippingPrice: number
+    orderStatus: string
+    deliveryBy: Date
+    category: string
+    product: {
+        description: string
+        type: string
+        currencyType: string
+        productAddress: string
+        imageUrl: string
+        name: string
+    }
 }
