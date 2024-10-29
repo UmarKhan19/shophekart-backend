@@ -43,7 +43,7 @@ app.use(
         secret: "siwe-quickstart-secret",
         saveUninitialized: false,
         resave: false,
-        cookie: { maxAge: 60000 * 60 * 24, sameSite: "strict" },
+        cookie: { maxAge: 60000 * 60 * 24, domain: config.CLIENT_URL },
         store: sessionStore
     })
 )
