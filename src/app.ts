@@ -4,7 +4,7 @@ import globalErrorHandler from "./middlewares/globalErrorHandler.middleware"
 import responseMessage from "./constants/responseMessage"
 import httpError from "./utils/httpError.util"
 import { categoryRouter, fixedProductRouter, healthRouter, orderRouter, productRouter, shippingAddressRouter, userRouter } from "./routers"
-import helmet from "helmet"
+// import helmet from "helmet"
 import cors from "cors"
 import { ALLOWED_ORIGINS } from "./constants/application"
 import Session from "express-session"
@@ -16,7 +16,7 @@ import replyRouter from "./routers/reply.router"
 const app: Application = express()
 
 //Middlewares
-app.use(helmet())
+// app.use(helmet())
 app.use(
     cors({
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
