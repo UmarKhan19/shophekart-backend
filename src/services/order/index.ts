@@ -6,3 +6,4 @@ export { default as getSellerHistoryService } from "./getSellerHistory.order.ser
 export { default as getBuyerHistoryService } from "./getBuyerHistory.order.service"
 export { default as updateNftIdService } from "./updateNftId.order.service"
 export { default as deleteOrderService } from "./delete.order.service"
+export { default as getSoldItemsOfUser } from "./getSoldItemsOfUser.order.service"
