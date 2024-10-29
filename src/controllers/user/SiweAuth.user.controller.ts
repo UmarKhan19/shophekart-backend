@@ -14,7 +14,6 @@ const SiweAuthController = asyncHandler(
             const siweMessage = new SiweMessage(req.body.message)
             siweMessage.chainId = req.body.message.chainId
             siweMessage.address = req.body.message.address
-
             const { error, data } = await siweMessage.verify({
                 signature: req.body.signature
             })
