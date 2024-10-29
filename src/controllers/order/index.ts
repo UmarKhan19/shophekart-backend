@@ -6,3 +6,4 @@ export { default as getSellerOrderHistory } from "./getSellerHistory.order.contr
 export { default as getBuyerOrderHistory } from "./getBuyerHistory.order.controller"
 export { default as updateNftId } from "./udpateNftId.order.controller"
 export { default as deleteOrder } from "./delete.order.controller"
+export { default as getSoldItemsOfLoggedInUser } from "./getSoldItems.order.controller"
