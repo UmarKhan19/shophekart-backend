@@ -21,7 +21,7 @@ const shippingAddressSchema = new mongoose.Schema<TShippingAddress>(
         },
         lastName: {
             type: String,
-            required: false,
+            required: true,
             trim: true
         },
         email: {
