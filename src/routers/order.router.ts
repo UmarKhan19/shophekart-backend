@@ -16,7 +16,7 @@ const router = Router()
 
 router.route("/my/seller").get(getSellerOrderHistory)
 router.route("/my/buyer").get(getBuyerOrderHistory)
-router.route("/single/:id").get(validateSchema(getSingleOrderSchema), getSingleOrder)
+router.route("/single/:orderId").get(validateSchema(getSingleOrderSchema), getSingleOrder)
 router.route("/my/sold-items").get(getSoldItemsOfLoggedInUser)
 router.route("/create").post(createOrder)
 router.route("/update-status").put(validateSchema(changeOrderStatusSchema), changeStatus)
