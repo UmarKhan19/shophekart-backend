@@ -1,7 +1,7 @@
 import { Types } from "mongoose"
 import { Review } from "../../models"
 
-export default async function (targetId: Types.ObjectId) {
+export default async function (targetId: Types.ObjectId, userId?: Types.ObjectId) {
     return await Review.aggregate<TGetReviews>([
         {
             $match: {
@@ -29,6 +29,16 @@ export default async function (targetId: Types.ObjectId) {
             $unwind: "$reviewer"
         },
         {
+            $addFields: {
+                isLikedByUser: {
+                    $in: [userId, "$likedBy"]
+                },
+                isDislikedByUser: {
+                    $in: [userId, "$dislikedBy"]
+                }
+            }
+        },
+        {
             $project: {
                 reviewerId: 0,
                 likedBy: 0,
@@ -54,4 +64,6 @@ type TGetReviews = {
     rating: number
     comment: string
     likes: number
+    isLikedByUser: boolean
+    isDislikedByUser: boolean
 }
