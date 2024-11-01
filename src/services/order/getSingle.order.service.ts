@@ -72,6 +72,7 @@ export default async function getSingleOrderService(orderId: Types.ObjectId): Pr
                 "product.description": 1,
                 "product.category": "$product.category.label",
                 "product.type": 1,
+                "product.nftId": "$product.productIdOnChain",
 
                 // Fields from the shipping address (excluding buyerId and _id)
                 "shippingAddress.city": 1,
