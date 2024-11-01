@@ -1,10 +1,18 @@
-import { Review } from "../../models";
-import IReviewDocument from "../../types/review.type";
+import { Types } from "mongoose"
+import { Review } from "../../models"
 
-const createReviewService = async (reviewData: IReviewDocument) => {
-  const review = new Review(reviewData);
-  await review.save();
-  return review.toJSON();
-};
+const createReviewService = async ({ ...data }: TCreateReview) => {
+    const review = await Review.create(data)
+    return review
+}
 
-export default createReviewService;
+export default createReviewService
+
+type TCreateReview = {
+    comment: string
+    rating: number
+    reviewType: "positive" | "neutral" | "negative"
+    reviewerId: Types.ObjectId
+    targetId: Types.ObjectId
+    targetType: "product" | "user"
+}
