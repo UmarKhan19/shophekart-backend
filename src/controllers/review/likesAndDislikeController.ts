@@ -1,66 +1,46 @@
-/* eslint-disable no-console */
+import { Request, Response, NextFunction } from "express"
+import { Review } from "../../models"
+import { asyncHandler, httpError, httpResponse } from "../../utils"
+import responseMessage from "../../constants/responseMessage"
+import { Types } from "mongoose"
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// Add these functions to your existing review.controller.ts file
-import { Request, Response, NextFunction } from "express";
-import { Review } from "../../models";
-import { httpError, httpResponse } from "../../utils";
-import responseMessage from "../../constants/responseMessage";
+export const likeController = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const reviewId = req.params.reviewId
+    const { userId } = req.body as { userId: string }
 
-export const increaseLikeController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const {userId} = req.body;
-   
-
-    const review = await Review.findById(reviewId);
-    if (!review) {
-        return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
-      }
-      const alreadyLiked = await Review.findOne({
-        _id: reviewId,
-        likedBy: { $in: [userId] },
-      });
-      if (alreadyLiked) {
-        httpError(next,  new Error("Already liked"), req,400)
-return
-      } 
-      await review.updateOne({ $inc: { likes: 1 }, $addToSet: { likedBy: userId } });
-
-
-    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Likes Increased"), review);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const increaseDislikeController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const {userId} = req.body;
-    const review = await Review.findById(reviewId);
+    const review = await Review.findById(reviewId)
 
     if (!review) {
-        return httpResponse(req, res, 404, responseMessage.NOT_FOUND("Review"),"");
-      }
-
-    const alreadyDisliked = await Review.findOne({
-        _id: reviewId,
-        dislikedBy: { $in: [userId] },
-      });
-      
-   
-      
-      if (alreadyDisliked) {
-        httpError(next,new Error("Already disliked"), req,400)
+        httpError(next, new Error(responseMessage.NOT_FOUND("Review")), req, 404)
         return
-    } 
-      await review.updateOne({ $inc: { dislikes: 1 }, $addToSet: { dislikedBy: userId } });
+    }
 
-      httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Dislikes Increased"), review);
-    } catch (error) {
-//    console.log(error);
-        next(error);
-  }
-};
+    if (review.likedBy.includes(new Types.ObjectId(userId))) {
+        await review.updateOne({ $inc: { likes: -1 }, $pull: { likedBy: userId } })
+    } else {
+        if (review.dislikedBy.includes(new Types.ObjectId(userId))) await review.updateOne({ $inc: { dislikes: -1 }, $pull: { dislikedBy: userId } })
+        await review.updateOne({ $inc: { likes: 1 }, $addToSet: { likedBy: userId } })
+    }
+
+    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Likes Increased"), review)
+})
+
+export const dislikeController = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const reviewId = req.params.reviewId
+    const { userId } = req.body as { userId: string }
+    const review = await Review.findById(reviewId)
+
+    if (!review) {
+        httpError(next, new Error(responseMessage.NOT_FOUND("Review")), req, 404)
+        return
+    }
+
+    if (review.dislikedBy.includes(new Types.ObjectId(userId))) {
+        await review.updateOne({ $inc: { dislikes: -1 }, $pull: { dislikedBy: userId } })
+    } else {
+        if (review.likedBy.includes(new Types.ObjectId(userId))) await review.updateOne({ $inc: { likes: -1 }, $pull: { likedBy: userId } })
+        await review.updateOne({ $inc: { dislikes: 1 }, $addToSet: { dislikedBy: userId } })
+    }
+
+    httpResponse(req, res, 200, responseMessage.SUCCESSFUL_OPERATION("Dislikes Increased"), review)
+})
