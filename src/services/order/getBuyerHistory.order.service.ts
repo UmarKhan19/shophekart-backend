@@ -41,6 +41,7 @@ export default async function getBuyerHistoryService(userId: Types.ObjectId): Pr
                 orderStatus: 1,
                 deliveryBy: 1,
                 product: {
+                    _id: "$product._id",
                     imageUrl: {
                         $arrayElemAt: ["$product.images", 0]
                     },
@@ -67,6 +68,7 @@ type TBuyerOrderHistory = {
     deliveryBy: Date
     category: string
     product: {
+        _id: Types.ObjectId
         description: string
         type: string
         currencyType: string
