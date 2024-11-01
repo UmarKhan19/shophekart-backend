@@ -1,19 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-import { Review } from "../../models";
-import { httpResponse } from "../../utils";
-import responseMessage from "../../constants/responseMessage";
+import { Request, Response } from "express"
+import { asyncHandler, httpResponse } from "../../utils"
+import responseMessage from "../../constants/responseMessage"
+import getReviewsService from "../../services/review/getReviews.service"
+import { Types } from "mongoose"
 
-const getReviewsController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const targetId = req.params.targetId;
-    const reviews = await Review.find({ targetId });
-    if (!reviews) {
-      res.status(400).json({"message":"No reviews found"});
-    }
-    return httpResponse(req, res, 200, responseMessage.FETCHED_SUCCESSFULLY("Reviews"), reviews);
-  } catch (error) {
-    next(error);
-  }
-};
+const getReviewsController = asyncHandler(async (req: Request, res: Response) => {
+    const targetId = req.params.targetId
+    const reviews = await getReviewsService(new Types.ObjectId(targetId))
+    return httpResponse(req, res, 200, responseMessage.FETCHED_SUCCESSFULLY("Reviews"), reviews)
+})
 
-export default getReviewsController;
+export default getReviewsController
