@@ -7,7 +7,6 @@ import getSingleProduct from "../product/getSingleProduct.product.service"
 
 export default async function updateOrderStatusService(
     orderId: Types.ObjectId,
-    sellerId: Types.ObjectId,
     status: ORDER_STATUS
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 ): Promise<(Document<unknown, {}, TOrder> & TOrder) | null> {
@@ -18,8 +17,6 @@ export default async function updateOrderStatusService(
     const product = await getSingleProduct(order.productId.toString())
 
     if (!product) throw new Error(responseMessage.NOT_FOUND("Product"))
-
-    if (product.sellerId.toString() !== sellerId.toString()) throw new Error(responseMessage.UNAUTHORIZED_ACCESS)
 
     order.orderStatus = status
 
