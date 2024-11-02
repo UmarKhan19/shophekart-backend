@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { NextFunction, Request, Response } from "express"
 import { asyncHandler, httpError, httpResponse } from "../../utils"
 import { TDeleteOrder } from "../../validation/order/delete.order.validation"
