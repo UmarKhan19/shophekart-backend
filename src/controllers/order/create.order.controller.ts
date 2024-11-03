@@ -22,7 +22,8 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
     if (product.stock <= 0) {
         product.status = "out of stock"
         await product.save()
-        product.httpError(next, new Error(responseMessage.NOT_FOUND("Stock")), req, 400) // Assuming you have an OUT_OF_STOCK message
+        
+        httpError(next, new Error(responseMessage.NOT_FOUND("Stock")), req, 400) // Assuming you have an OUT_OF_STOCK message
         return
     }
     const order = await createOrderService({
