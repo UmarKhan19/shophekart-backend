@@ -3,7 +3,7 @@ import { Order } from "../../models"
 import responseMessage from "../../constants/responseMessage"
 import { TOrderStatus } from "../../constants/application"
 
-export default async function getSingleOrderService(orderId: Types.ObjectId): Promise<TOrder> {
+export default async function getSingleOrderService(orderId: Types.ObjectId, userId: Types.ObjectId): Promise<TOrder> {
     const order = await Order.aggregate<TOrder>([
         {
             $match: {
@@ -55,6 +55,16 @@ export default async function getSingleOrderService(orderId: Types.ObjectId): Pr
             $unwind: "$product.category"
         },
         {
+            $addFields: {
+                isCallerBuyer: {
+                    $eq: [userId, "$buyerId"]
+                },
+                isCallerSeller: {
+                    $eq: [userId, "$product.sellerId"]
+                }
+            }
+        },
+        {
             $project: {
                 // Fields directly from the order
                 orderStatus: 1,
@@ -62,6 +72,11 @@ export default async function getSingleOrderService(orderId: Types.ObjectId): Pr
                 shippingPrice: 1,
                 currencyType: "$product.currencyType",
                 deliveryBy: 1,
+                nftId: 1,
+
+                // Caller identity checks
+                isCallerBuyer: 1,
+                isCallerSeller: 1,
 
                 // Fields from the buyer
                 "buyer.walletAddress": 1,
@@ -72,7 +87,6 @@ export default async function getSingleOrderService(orderId: Types.ObjectId): Pr
                 "product.description": 1,
                 "product.category": "$product.category.label",
                 "product.type": 1,
-                "product.nftId": "$product.productIdOnChain",
 
                 // Fields from the shipping address (excluding buyerId and _id)
                 "shippingAddress.city": 1,
@@ -129,4 +143,6 @@ type TOrder = {
     shippingAddress: Address
     shippingPrice: number
     buyer: Buyer
+    isCallerBuyer: boolean
+    isCallerSeller: boolean
 }

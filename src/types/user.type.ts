@@ -7,6 +7,7 @@
 interface IUser {
     walletAddress: `0x${string}`
     trustScore: number
+    description:string;
 }
 
 export default IUser

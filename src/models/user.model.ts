@@ -31,7 +31,11 @@ const userSchema = new Schema(
             unique: true,
             index: true
         },
-
+        description: {
+            type: String,
+            required: [true],
+           default:"Explore my top picks from the world of e-commerce, featuring products I've carefully curated to elevate your shopping experience. Whether you're looking for the latest deals or timeless essentials, I've got you covered."
+        },
         /**
          * The trust score of the user.
          *

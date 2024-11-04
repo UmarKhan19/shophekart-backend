@@ -11,7 +11,7 @@ import { createOrderService } from "../../services/order"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"]>, res: Response, next: NextFunction) => {
-    const { buyerId, deliveryBy, productId, shippingPrice, productIdOnChain,shippingAddress } = req.body
+    const { buyerId, deliveryBy, productId, shippingPrice, productIdOnChain, shippingAddress } = req.body
 
     const product = await FixedProduct.findById(productId)
 
@@ -22,7 +22,6 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
     if (product.stock <= 0) {
         product.status = "out of stock"
         await product.save()
-        
         httpError(next, new Error(responseMessage.NOT_FOUND("Stock")), req, 400) // Assuming you have an OUT_OF_STOCK message
         return
     }
@@ -37,7 +36,7 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
         soldAtPrice: product.price ?? 0
     })
     product.stock -= 1
-console.log(2323)
+    console.log(2323)
     // Save the updated product
     await product.save()
     httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("Order"), order)

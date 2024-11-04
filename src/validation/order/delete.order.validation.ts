@@ -3,11 +3,11 @@ import validationErrorMessages from "../../constants/validationErrors"
 
 const deleteOrderSchema = z.object({
     params: z.object({
-        orderId: z
-            .string({
-                required_error: validationErrorMessages.MISSING_ENTITY("Order Id")
-            })
-            .uuid(validationErrorMessages.INVALID_ENTITY("Order Id"))
+        orderId: z.string({
+            required_error: validationErrorMessages.MISSING_ENTITY("Order Id"),
+            invalid_type_error: validationErrorMessages.INVALID_ENTITY("Order Id"),
+            message: validationErrorMessages.MISSING_ENTITY("Order Id")
+        })
     })
 })
 
