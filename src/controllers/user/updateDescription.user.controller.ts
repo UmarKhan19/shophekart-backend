@@ -33,14 +33,14 @@ const updateDescription = asyncHandler(async (req: Request<{}, {}>, res: Respons
      * @type {string} walletAddress
      * @type {string} description
      */
-    const { walletAddress} = req.body;
+    const { walletAddress, description } = req.body;
 
     /**
      * Updates the user description by calling the service function.
      *
      * @type {IUserDocument} updatedUser - The updated user document.
      */
-    const updatedUser = await updateDescriptionService(walletAddress);
+    const updatedUser = await updateDescriptionService(walletAddress, description);
 
     /**
      * Sets the HTTP response with the updated user data.
