@@ -18,7 +18,7 @@ import { IUserDocument } from "../../types";
  * @throws {Error} If the user is not found or an error occurs during the update.
  * @returns {Promise<IUserDocument>} A promise that resolves to the updated user document.
  */
-const updateDescriptionService = async (walletAddress: `0x${string}`, name: string): Promise<IUserDocument> => {
+const updateNameService = async (walletAddress: `0x${string}`, name: string): Promise<IUserDocument> => {
     try {
         /**
          * Finds the user by wallet address.
@@ -46,4 +46,4 @@ const updateDescriptionService = async (walletAddress: `0x${string}`, name: stri
     }
 };
 
-export default updateDescriptionService;
+export default updateNameService;
