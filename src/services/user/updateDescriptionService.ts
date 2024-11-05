@@ -13,7 +13,7 @@ import { IUserDocument } from "../../types";
  *
  * @async
  * @function updateDescriptionService
- * @param {string} walletAddress - The wallet address of the user to update.
+ * @param {`0x${string}`} walletAddress - The wallet address of the user to update.
  * @param {string} description - The new description text to set.
  * @throws {Error} If the user is not found or an error occurs during the update.
  * @returns {Promise<IUserDocument>} A promise that resolves to the updated user document.
@@ -21,22 +21,27 @@ import { IUserDocument } from "../../types";
 const updateDescriptionService = async (walletAddress: `0x${string}`, description: string): Promise<IUserDocument> => {
     try {
         /**
-         * Finds the user by wallet address and updates the description.
+         * Finds the user by wallet address.
          *
-         * @type {IUserDocument|null} user - The updated user document, or null if not found.
+         * @type {IUserDocument | null} user - The user document, or null if not found.
          */
-        const user = await User.findOneAndUpdate(
-            { walletAddress },
-            { description },
-            { new: true, runValidators: true }
-        );
+        const user = await User.findOne({ walletAddress });
 
+        // If no user is found, throw a 'not found' error
         if (!user) {
             throw new Error(responseMessage.NOT_FOUND("User"));
         }
 
+        // Update the description field with the new value
+        user.description = description;
+
+        // Save the updated user document
+        await user.save();
+
+        // Return the updated user document
         return user;
     } catch (error) {
+        // Throw a custom error message if the update fails
         throw new Error(`Failed to update description: ${(error as Error).message}`);
     }
 };
