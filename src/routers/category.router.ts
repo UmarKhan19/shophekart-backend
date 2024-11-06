@@ -1,16 +1,17 @@
 // category.route.ts
 
-import { Router } from "express";
-import { validateSchema } from "../middlewares";
+import { Router } from "express"
+import { validateSchema } from "../middlewares"
 
 // Import the validation schema for creating a category
-import createCategorySchema from "../validation/category/createCategory.category.validation";
+import createCategorySchema from "../validation/category/createCategory.category.validation"
 
 // Import the controller for creating a category
-import createCategoryController from "../controllers/category/category.controller";
-import getCategoriesController from "../controllers/category/getCategories.controller";
+import createCategoryController from "../controllers/category/category.controller"
+import getCategoriesController from "../controllers/category/getCategories.controller"
+import addDefaultCategories from "../controllers/category/addDefault.controller"
 
-const categoryRouter: Router = Router();
+const categoryRouter: Router = Router()
 
 /**
  * Creates a new category.
@@ -23,13 +24,7 @@ const categoryRouter: Router = Router();
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-categoryRouter.post(
-  "/create",
-  validateSchema(createCategorySchema),
-  createCategoryController
-);
-categoryRouter.get(
-  "/all",
-  getCategoriesController
-)
-export default categoryRouter;
+categoryRouter.post("/create", validateSchema(createCategorySchema), createCategoryController)
+categoryRouter.post("/add-default", addDefaultCategories)
+categoryRouter.get("/all", getCategoriesController)
+export default categoryRouter
