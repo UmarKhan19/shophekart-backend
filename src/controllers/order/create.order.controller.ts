@@ -1,19 +1,17 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { NextFunction, Request, Response } from "express"
 import { asyncHandler, httpError, httpResponse } from "../../utils"
 import { FixedProduct } from "../../models"
 import { TCreateOrder } from "../../validation/order/create.order.validation"
 import responseMessage from "../../constants/responseMessage"
 import { createOrderService } from "../../services/order"
+import IFixedProductDocument from "../../types/fixedProduct.type"
+import { Document } from "mongoose"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"]>, res: Response, next: NextFunction) => {
     const { buyerId, deliveryBy, productId, shippingPrice, productIdOnChain, shippingAddress } = req.body
 
-    const product = await FixedProduct.findById(productId)
+    const product = (await FixedProduct.findById(productId)) as IFixedProductDocument & Document
 
     if (!product) {
         httpError(next, new Error(responseMessage.NOT_FOUND("Product")), req, 404)
@@ -36,7 +34,6 @@ const createOrder = asyncHandler(async (req: Request<{}, {}, TCreateOrder["body"
         soldAtPrice: product.price ?? 0
     })
     product.stock -= 1
-    console.log(2323)
     // Save the updated product
     await product.save()
     httpResponse(req, res, 201, responseMessage.CREATED_SUCCESSFULLY("Order"), order)
