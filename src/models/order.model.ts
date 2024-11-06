@@ -42,12 +42,12 @@ const orderSchema = new Schema(
          * @required
          * @description The delivery date should be in the future.
          */
-        
-            shippingAddress: {
-              type: Types.ObjectId,
-              ref: "ShippingAddress",
-              required: true,
-            },
+
+        shippingAddress: {
+            type: Types.ObjectId,
+            ref: "ShippingAddress",
+            required: true
+        },
         deliveryBy: {
             type: Date,
             required: true,
@@ -135,6 +135,11 @@ const orderSchema = new Schema(
         timestamps: true
     }
 )
+
+orderSchema.pre("find", function (next) {
+    this.find({ nftId: { $ne: 0, $gt: 0 } })
+    next()
+})
 
 /**
  * Define the Order model.
