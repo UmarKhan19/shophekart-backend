@@ -39,6 +39,9 @@ const createProductSchema = z.object({
         }),
         category: z
             .string({ required_error: validationErrorMessages.MISSING_ENTITY("Category") })
+            .uuid(validationErrorMessages.INVALID_ENTITY("Category")),
+            email: z
+            .string({ required_error: validationErrorMessages.MISSING_ENTITY("Category") })
             .uuid(validationErrorMessages.INVALID_ENTITY("Category"))
     })
 })

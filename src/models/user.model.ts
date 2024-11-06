@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /**
  * User model definition.
  *
@@ -14,7 +17,7 @@ import { IUserDocument } from "../types"
  * userSchema definition.
  *
  * This schema defines the structure for the User data model.
- * It includes fields for walletAddress, firstName, lastName, email, phoneNumber, and trustScore.
+ * It includes fields for walletAddress, name, description, and trustScore.
  * Each field has validation rules and constraints defined.
  **/
 const userSchema = new Schema(
@@ -30,6 +33,25 @@ const userSchema = new Schema(
             required: [true, validationErrorMessages.MISSING_ENTITY("Wallet Address")],
             unique: true,
             index: true
+        },
+        
+        /**
+         * The name of the user.
+         *
+         * This field is optional and defaults to the wallet address if not provided.
+         */
+        name: {
+            type: String,
+            default: function () {
+              return (this as any).walletAddress; // Type assertion to access walletAddress
+            },
+            required:true
+          },
+        
+        description: {
+            type: String,
+            required: [true],
+            default: "Explore my top picks from the world of e-commerce, featuring products I've carefully curated to elevate your shopping experience. Whether you're looking for the latest deals or timeless essentials, I've got you covered."
         },
 
         /**
@@ -61,6 +83,7 @@ const userSchema = new Schema(
  *
  * @property {string} _id - The unique identifier for the document.
  * @property {`0x${string}`} walletAddress - The user's wallet address, starting with '0x' followed by a string.
+ * @property {string} name - The user's name, defaults to the wallet address if not specified.
  * @property {number} trustScore - A numerical value representing the user's trust score.
  * @property {Date} createdAt - The date and time the document was created.
  * @property {Date} updatedAt - The date and time the document was last updated.

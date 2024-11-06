@@ -4,6 +4,7 @@ import { Types } from "mongoose"
 interface IProductDocument {
     _id: string
     productIdOnChain: number
+
     sellerId: Types.ObjectId
     currencyType: "USDT" | "USDC" | "CSHOP" | "BNB"
     currencyAddress: string;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { Request, Response } from "express";
 import { asyncHandler, httpResponse } from "../../utils";
