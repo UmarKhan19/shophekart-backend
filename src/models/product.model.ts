@@ -30,6 +30,11 @@ const productSchema = new Schema<IProductDocument>(
     { timestamps: true, discriminatorKey: "type" }
 )
 
+productSchema.pre("find", function (next) {
+    this.find({ productIdOnChain: { $ne: 0, $gt: 0 } })
+    next()
+})
+
 const Product = model<IProductDocument>("Product", productSchema)
 
 export default Product
