@@ -31,7 +31,7 @@ const productSchema = new Schema<IProductDocument>(
 )
 
 productSchema.pre("find", function (next) {
-    this.find({ productIdOnChain: { $ne: 0, $gt: 0 } })
+    this.find({ productIdOnChain: { $ne: 0, $gt: 0 } }).sort({ createdAt: -1 })
     next()
 })
 
