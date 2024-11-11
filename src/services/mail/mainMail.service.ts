@@ -39,6 +39,7 @@ export async function mainMail(proposal: string, walletAddress: string): Promise
         await transporter.sendMail(mailOption)
         return "Message Sent Successfully!"
     } catch (error) {
+        console.log(error)
         return "Message could not be sent!"
     }
 }
