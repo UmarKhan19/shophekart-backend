@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable no-useless-catch */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -5,6 +7,7 @@
 import nodemailer from "nodemailer"
 import { config } from "../../config"
 export async function mainMail(proposal: string, walletAddress: string): Promise<string> {
+    console.log(config.EMAIL)
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -36,6 +39,6 @@ export async function mainMail(proposal: string, walletAddress: string): Promise
         await transporter.sendMail(mailOption)
         return "Message Sent Successfully!"
     } catch (error) {
-        throw error
+        return "Message could not be sent!"
     }
 }
