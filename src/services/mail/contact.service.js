@@ -6,14 +6,14 @@ async function mainMail(proposal, walletAddress) {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.USER,
-            pass: process.env.PASSWORD
+            user: config.EMAIL,
+            pass: config.PASSWORD
         }
     })
 
     const mailOption = {
-        from: process.env.USER, // Sender email (your email)
-        to: process.env.USER, // Receiver email (also your email)
+        from: config.EMAIL, // Sender email (your email)
+        to: config.EMAIL, // Receiver email (also your email)
         subject: "New Proposal Submission",
         html: `
       <div style="font-family: Arial, sans-serif; line-height: 1.5;">
