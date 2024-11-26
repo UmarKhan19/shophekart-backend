@@ -28,7 +28,7 @@ const checkLimitController = async (req: Request, res: Response, next: NextFunct
         // Filter timestamps within the last 24 hours
         wallet.timestamps = wallet.timestamps.filter((timestamp) => timestamp > twentyFourHoursAgo)
 
-        if (wallet.timestamps.length >= 2) {
+        if (wallet.timestamps.length >= 25) {
             return httpResponse(req, res, 200, responseMessage.FETCHED_SUCCESSFULLY("Not Allowed"), { allowed: false })
         }
 
