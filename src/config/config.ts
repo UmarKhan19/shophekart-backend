@@ -8,6 +8,7 @@ export default {
     SERVER_URL: process.env.SERVER_URL,
     CLIENT_URL: process.env.CLIENT_URL,
     EMAIL: process.env.EMAIL,
+    EMAIL_USER: process.env.EMAIL_USER,
     PASSWORD: process.env.PASSWORD,
 
     // Database

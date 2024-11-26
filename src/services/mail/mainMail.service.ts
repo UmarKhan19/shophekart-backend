@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-/* eslint-disable no-useless-catch */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import nodemailer from "nodemailer"
 import { config } from "../../config"
 export async function mainMail(proposal: string, walletAddress: string): Promise<string> {
@@ -17,7 +13,7 @@ export async function mainMail(proposal: string, walletAddress: string): Promise
     })
 
     const mailOption = {
-        from: config.EMAIL,
+        from: config.EMAIL_USER,
         to: config.EMAIL,
         subject: "New Proposal Submission",
         html: `

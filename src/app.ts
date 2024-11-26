@@ -15,7 +15,6 @@ import replyRouter from "./routers/reply.router"
 import Emailrouter from "./routers/emailRoute.router"
 const app: Application = express()
 
-//Middlewares
 app.use(helmet())
 app.use(
     cors({
