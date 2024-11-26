@@ -13,6 +13,7 @@ import { config } from "./config"
 import reviewRouter from "./routers/review.router"
 import replyRouter from "./routers/reply.router"
 import Emailrouter from "./routers/emailRoute.router"
+import walletRouter from "./routers/chat.router"
 const app: Application = express()
 
 app.use(helmet())
@@ -58,7 +59,7 @@ app.use("/api/v1/shipping-address", shippingAddressRouter)
 app.use("/api/v1/reply", replyRouter)
 app.use("/api/v1/review", reviewRouter)
 app.use("/api/v1/email", Emailrouter)
-
+app.use("api/v1", walletRouter)
 // 404 Handler
 app.use((req: Request, _: Response, next: NextFunction): void => {
     try {
