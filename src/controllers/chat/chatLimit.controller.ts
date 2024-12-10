@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable no-console */
+
 import { Request, Response, NextFunction } from "express"
 import Wallet from "../../models/chat.model"
 import { httpResponse } from "../../utils"
